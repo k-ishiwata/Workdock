@@ -14,8 +14,17 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             [
                 'name' => 'admin',
-                'display_name' => '山田太郎',
+                'display_name' => '管理者',
                 'email' => 'admin@example.com',
+                'email_verified_at' => now(),
+                'password' => \Hash::make('123456'),
+                'remember_token' => null,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],[
+                'name' => 'yamada',
+                'display_name' => '山田太郎',
+                'email' => 'yamada@example.com',
                 'email_verified_at' => now(),
                 'password' => \Hash::make('123456'),
                 'remember_token' => null,
