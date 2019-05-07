@@ -1,0 +1,82 @@
+.btn {
+    min-width: 150px;
+    text-decoration: none;
+    padding: 14px 20px;
+    background: map-get($colors, "gray");
+    color: #fff;
+    display: inline-block;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: background-color .3s;
+    border-radius: 30px;
+    // border: solid 1px map-get($colors, gray);
+    border: solid 1px transparent;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+
+    &:hover {
+        color: #fff;
+        background-color: lighten(map-get($colors, "gray"), 8%);
+    }
+
+    &.is-sm {
+        font-size: .8rem;
+        min-width: 0;
+        padding: 8px 26px;
+        font-weight: normal;
+    }
+
+    &.is-primary {
+        color: #fff;
+        background: $color-key;
+        // border-color: $color-key;
+
+        &:hover {
+            color: #fff;
+            background-color: lighten($color-key, 8%)
+        }
+    }
+
+    @each $key, $color in $colors {
+        &.is-#{$key} {
+            background-color: $color;
+            // border-color: $color;
+
+            &:hover {
+                background-color: lighten($color, 6%);
+            }
+        }
+    }
+
+
+    &.is-outline {
+        background: transparent;
+        color: $color-key;
+
+        &:hover {
+            background-color: $color-key-light;
+        }
+
+        &.is-gray {
+            color: $color-text;
+            border-color: $color-bd;
+
+            &:hover {
+                background-color: #EFF3F5;
+            }
+        }
+    }
+
+    &.is-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        i {
+            margin-right: 3px;
+        }
+    }
+
+} // .btn

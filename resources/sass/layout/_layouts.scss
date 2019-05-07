@@ -1,0 +1,47 @@
+.inner {
+    max-width: $inner-width;
+    margin-left: auto;
+    margin-right: auto;
+
+    &.is-sm {
+        max-width: $inner-width-sm;
+    }
+}
+
+#l-container {
+    padding: 80px 15px 15px;
+}
+
+.overlay {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, .3);
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay.is-open {
+    display: flex;
+}
+
+.modal {
+    position: relative;
+    width: 700px;
+    z-index: 1000;
+    box-shadow: 2px 2px 25px rgba(0, 0, 0, .3)
+}
+
+@media screen and (max-width: map-get($breakpoints, md)) {
+
+}
+
+@media screen and (max-width: map-get($breakpoints, sm)) {
+
+}

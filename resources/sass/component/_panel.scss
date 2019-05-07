@@ -1,0 +1,72 @@
+//  ----------------------------------------------
+//  Panel
+//  ----------------------------------------------
+$panel-padding: 25px;
+
+.panel {
+    background: #fff;
+    padding: $panel-padding;
+    box-shadow: 4px 4px 10px $color-shadow;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: 1px solid $color-bd;
+
+    .panel-title {
+        background: #F5F8FA;
+        font-size: 1rem;
+        padding: 15px;
+        margin: (-$panel-padding) (-$panel-padding) $panel-padding;
+        text-align: center;
+        border-bottom: 1px solid $color-bd;
+    }
+
+    .panel-body {
+        &.is-full {
+            margin: -$panel-padding -$panel-padding 0;
+        }
+    }
+
+    .panel-footer {
+        border-top: 1px solid $color-bd;
+        margin: 0 (-$panel-padding) 0;
+        padding-top: 20px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+
+        .btn {
+            margin: 0 5px;
+        }
+    }
+} // ,panel
+
+@media screen and (max-width: map-get($breakpoints, sm)) {
+    .panel {
+        padding: 20px;
+        margin: 10px;
+        
+        .panel-title {
+            margin-top: -20px;
+        }
+
+        .panel-footer {
+            border-top: 1px solid $color-bd;
+            margin: 0 -20px 0;
+            padding: 20px 10px 20px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+    
+            .btn {
+                width: 100%;
+                min-width: 0;
+                margin: 0 5px;
+            }
+        }
+    }
+}
+
+
+
+

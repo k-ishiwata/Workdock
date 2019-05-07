@@ -1,0 +1,43 @@
+//  ----------------------------------------------
+//  Pager
+//  ----------------------------------------------
+ul.pagination {
+    display: flex;
+    margin-top: 13px;
+    list-style: none;
+    font-size: .75rem;
+    line-height: 1;
+
+    .page-item {
+        border: solid 1px $color-bd;
+        margin-left: -1px;
+
+        .page-link {
+            display: block;
+            color: $color-text;
+            padding: 10px 12px;
+            text-decoration: none;
+            background: #FAFAFA;
+
+            &:hover {
+                background-color: $color-bg-hover;
+            }
+        }
+
+        &.disabled {
+            .page-link {
+                color: #999;
+                background: #eee;
+            }
+        }
+
+        &.active {
+            .page-link {
+                color: $color-key;
+                background: #fff;
+                font-weight: bold;
+            }
+        }
+    }
+}
+

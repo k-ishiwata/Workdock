@@ -1,0 +1,19 @@
+//  ----------------------------------------------
+//  label
+//  ----------------------------------------------
+.label {
+    line-height: 1;
+    font-size: 85%;
+    display: inline-block;
+    text-align: center;
+    color: #fff;
+    background: map-get($colors, "gray");
+    padding: 5px 10px;
+    border-radius: 3px;
+
+    @each $key, $color in $colors {
+        &.is-#{$key} {
+            background-color: $color;
+        }
+    }
+}

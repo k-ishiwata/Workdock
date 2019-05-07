@@ -1,0 +1,81 @@
+//  ----------------------------------------------
+//  Table
+//  ----------------------------------------------
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+
+    th {
+        text-align: left;
+    }
+}
+
+.table {
+    color: $color-text;
+    background: #fff;
+    table-layout: fixed;
+    border-top: 1px solid $color-bd;
+    border-left: 1px solid $color-bd;
+    line-height: 1.4;
+
+    th, td {
+        padding: 7px;
+        border-bottom: 1px solid $color-bd;
+        border-right: 1px solid $color-bd;
+    }
+
+    th {
+        background: lighten($color-key, 45%);
+        text-align: left;
+        vertical-align: top;
+        font-weight: bold;
+    }
+
+    thead th {
+        font-size: 93%;
+        font-weight: bold;
+        text-align: center;
+        vertical-align: middle;
+        // white-space: nowrap;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        border-bottom: 3px solid $color-bd;
+    }
+
+    .center {
+        text-align: center;
+    }
+
+
+    &.is-middle {
+        th, td {
+            vertical-align: middle;
+        }
+    }
+
+    tr {
+        &.bg-color {
+            background-color: lighten($color-key, 50%);
+        }
+    }
+
+    &.is-stripe {
+        tr:nth-child(even) {
+            background-color: #F5F8F8;
+        }
+    }
+
+    &.is-lg {
+        th, td {
+            padding: 25px 35px;
+        }
+    }
+
+} //.table
+
+@media screen and (max-width: map-get($breakpoints, sm)) {
+    .table {
+
+    }
+}

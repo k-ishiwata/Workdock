@@ -1,20 +1,63 @@
+/*
+ * # Color
+ */
+$color-key: #30A2EF;
+$color-key-light: #E8F5FD;
+// $color-key-light: #a2ca4a;
+$color-text: #444;
+$color-text-light: #666;
+$color-title: #333;
 
-// Body
-$body-bg: #f8fafc;
+$color-link: $color-key;
+$color-link-hover: #5ECBFC;
 
-// Typography
-$font-family-sans-serif: "Nunito", sans-serif;
-$font-size-base: 0.9rem;
-$line-height-base: 1.6;
+$colors: (
+    "gray": #888,
+    "red": #FF7979,
+    "green": #12C63B,
+    "blue": #2695F5,
+    "orange": #F4B053,
+    "purple": #BF57DE
+);
 
-// Colors
-$blue: #3490dc;
-$indigo: #6574cd;
-$purple: #9561e2;
-$pink: #f66D9b;
-$red: #e3342f;
-$orange: #f6993f;
-$yellow: #ffed4a;
-$green: #38c172;
-$teal: #4dc0b5;
-$cyan: #6cb2eb;
+// 背景ベースカラー
+$color-bg: #EFF3F5;
+$color-bg-hover: #F5F8F8;
+
+// ライン
+$color-bd: #ddd;
+
+// shadow
+$color-shadow: rgba(170, 190, 205, .15);
+
+/*
+ * # Font
+ */
+$font-small: 0.8rem;
+$font-big: 1.2rem;
+
+/*
+ * # Inner
+ */
+$inner-width: 1020px;
+$inner-width-sm: 740px;
+
+
+/*
+ * # Break Point
+ */
+$breakpoints: (
+    // sm: "620px"
+    sm: "620px",
+    md: "960px",
+    // lg: "1200px"
+);
+
+/*
+ * # Margin
+ */
+$sp-padding: 15px;
+
+$font-ja: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "メイリオ", "ＭＳ Ｐゴシック", Osaka, sans-serif;
+// $font-ja: "游ゴシック体", YuGothic, "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック", "Yu Gothic", "メイリオ", "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "メイリオ","ＭＳ Ｐゴシック", Osaka, sans-serif;
+$font-en: 'Raleway', sans-serif;

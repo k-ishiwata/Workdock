@@ -1,0 +1,145 @@
+//  ----------------------------------------------
+//  Basic Selector
+//  ----------------------------------------------
+*:before,
+*:after,
+* {
+    box-sizing: border-box;
+}
+
+// * {
+// 	-webkit-appearance: none;
+// }
+figure, figcaption,
+body, div, pre, p, blockquote, form,
+dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6,
+embed, object {
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+}
+
+body {
+    color: $color-text;
+    background: $color-bg;
+    font: 13px/1 $font-ja;
+    // word-wrap: break-word;
+    // word-wrap: normal;
+}
+
+img {
+    border: 0;
+    vertical-align: bottom;
+    max-width: 100%;
+    height: auto;
+}
+
+a {
+    color: $color-link;
+    text-decoration: underline;
+    cursor: pointer;
+    outline: none;
+    // transition: color .3s linear;
+
+    &:hover {
+        color: $color-link-hover;
+        text-decoration: none;
+    }
+}
+
+
+// ::selection {
+// 	background: #efe0cd;
+// }
+// ::-moz-selection {
+// 	background: #efe0cd;
+// }
+
+hr {
+    border: none;
+    background: $color-bg;
+    height: 1px;
+}
+
+sup {
+    font-size: 70%;
+}
+
+iframe {
+    border: none;
+}
+
+ol ul,
+ul ul {
+    list-style: disc;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.align-center {
+    text-align: center;
+}
+
+.align-left {
+    text-align: left;
+}
+
+.align-right {
+    text-align: right;
+}
+
+//  ----------------------------------------------
+//  Text styles
+//  ----------------------------------------------
+em, strong {
+    font-weight: bold;
+    font-style: normal;
+}
+
+.font-en {
+    font-family: $font-en;
+}
+
+.font-italic {
+    font-style: italic;
+}
+
+.txt-white {
+    color: #fff;
+}
+
+.txt-gray {
+    color: #999;
+}
+
+.txt-key {
+    color: $color-key;
+}
+
+.txt-key-light {
+    color: $color-key-light;
+}
+
+small,
+.txt-small {
+    font-size: $font-small;
+}
+
+.txt-big {
+    font-size: $font-big;
+}
+
+@for $i from 0 through 10 {
+    .w#{$i*10} {
+        width: #{$i*10%} !important;
+    }
+    .mb#{$i*10} {
+        margin-bottom: #{$i*10px} !important;
+    }
+}
+
+.mb0 {
+    margin-bottom: 0 !important;
+}

@@ -1,0 +1,28 @@
+#l-login {
+    max-width: 460px;
+    margin: 0 auto;
+    padding-top: 8%;
+
+    .brand-logo {
+        text-align: center;
+        font-size: 1.6rem;
+        margin-bottom: 30px;
+    }
+
+    .login-footer {
+        text-align: center;
+
+        a {
+            text-decoration: none;
+            color: $color-text;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+} // #l-login
+
+@media screen and (max-width: map-get($breakpoints, sm)) {
+
+}
