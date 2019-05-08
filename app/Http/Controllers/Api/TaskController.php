@@ -15,7 +15,9 @@ class TaskController extends Controller
      */
     public function index()
     {
-        return Task::all();
+        return Task::with(['user' => function($q) {
+            $q->select('id', 'display_name');
+        }])->get();
     }
     
     /**

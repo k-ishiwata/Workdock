@@ -39,7 +39,7 @@
         text-align: center;
 
         &.is-high {
-            color: map-get($colors, red);
+            color: map-get($colors, "red");
             font-weight: bold;
         }
     }

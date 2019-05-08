@@ -17,4 +17,9 @@ class Task extends Model
     
     // Date型で扱う
     protected $dates = ['due_at', 'start_at'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

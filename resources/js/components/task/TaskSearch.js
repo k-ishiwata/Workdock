@@ -11,7 +11,7 @@ export default class TaskSearch extends Component {
                     <form className="form">
                         <div className="input-group mb10">
                             <div className="status-select checkbox-btn-group">
-                                <input type="radio" name="status-select" id="status-5" checked />
+                                <input type="radio" name="status-select" id="status-5" />
                                 <label htmlFor="status-5">完了以外</label>
                                 <input type="radio" name="status-select" id="status-1" />
                                 <label htmlFor="status-1">未着手</label>
@@ -31,7 +31,7 @@ export default class TaskSearch extends Component {
                             <div className="input-group">
                                 <div className="select-box" data-placeholder="プロジェクト選択">
                                     <select name="project">
-                                        <option selected>プロジェクト選択</option>
+                                        <option>プロジェクト選択</option>
                                         <option value="B">Workdock</option>
                                         <option value="O">ポータルサイト</option>
                                         <option value="AB">ランディングページ</option>
@@ -41,7 +41,7 @@ export default class TaskSearch extends Component {
                             <div className="input-group">
                                 <div className="select-box">
                                     <select name="project">
-                                        <option selected>担当者</option>
+                                        <option>担当者</option>
                                         <option value="A">山田太郎</option>
                                         <option value="B">田中一郎</option>
                                         <option value="O">鈴木光一</option>

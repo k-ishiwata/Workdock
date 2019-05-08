@@ -33,7 +33,7 @@
     <div class="header-right">
         <div class="user-panel">
             <div class="user-panel-toggle">
-                <div class="image"><img src="assets/img/face.jpg" alt=""></div>
+{{--                <div class="image"><img src="assets/img/face.jpg" alt=""></div>--}}
                 <p>山田太郎</p>
             </div>
             <div class="user-panel-menu">
