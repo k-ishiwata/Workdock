@@ -1,6 +1,6 @@
-/*
- * # Color
- */
+//
+// # Color
+//
 $color-key: #30A2EF;
 $color-key-light: #E8F5FD;
 // $color-key-light: #a2ca4a;
@@ -30,22 +30,21 @@ $color-bd: #ddd;
 // shadow
 $color-shadow: rgba(170, 190, 205, .15);
 
-/*
- * # Font
- */
+//
+// # Font
+//
 $font-small: 0.8rem;
 $font-big: 1.2rem;
 
-/*
- * # Inner
- */
+//
+// # Inner
+//
 $inner-width: 1020px;
 $inner-width-sm: 740px;
 
-
-/*
- * # Break Point
- */
+//
+// # Break Point
+//
 $breakpoints: (
     // sm: "620px"
     sm: "620px",
@@ -53,9 +52,9 @@ $breakpoints: (
     // lg: "1200px"
 );
 
-/*
- * # Margin
- */
+//
+// # Margin
+//
 $sp-padding: 15px;
 
 $font-ja: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "メイリオ", "ＭＳ Ｐゴシック", Osaka, sans-serif;

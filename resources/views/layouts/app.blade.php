@@ -1,80 +1,59 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="ja">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Workdock</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
-
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <meta name="viewport" content="width=device-width">
+    <link href="http://cdn.remixicon.com/releases/v1.1.2/remixicon.css" rel="stylesheet">
+{{--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">--}}
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+<header id="l-header">
+    <!-- <p class="brand-logo"><a href="/">Work<span>Dock</span></a></p> -->
+    <nav class="header-nav">
+        <ul>
+            <li><a href="/">ダッシュボード</a></li>
+            <li class="is-active"><a href="/tasks">タスク</a></li>
+            <li><a href="#">プロジェクト</a></li>
+            <li><a href="#">メンバー</a></li>
+        </ul>
+    </nav>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
+    <!-- <div id="global-search">
+        <form action="#" class="form">
+            <input type="text" placeholder="キーワード検索">
+            <button type="submit" class="search-btn">
+                <img src="assets/img/icon-search.svg" alt="">
+            </button>
+        </form>
+    </div> -->
+    <div class="header-right">
+        <div class="user-panel">
+            <div class="user-panel-toggle">
+                <div class="image"><img src="assets/img/face.jpg" alt=""></div>
+                <p>山田太郎</p>
             </div>
-        </nav>
-
-        <main class="py-4">
-            @yield('content')
-        </main>
+            <div class="user-panel-menu">
+                <ul>
+                    <li><a href="#">ユーザー設定</a></li>
+                    <li><a href="#">ログアウト</a></li>
+                </ul>
+            </div>
+        </div>
     </div>
+    <!-- <ul class="head-nav">
+        <li><a href="create.html" class="btn">新規作成</a></li>
+        <li><a href="#" class="btn is-outline">ログアウト</a></li>
+    </ul> -->
+</header>
+
+@yield('content')
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://npmcdn.com/flatpickr@4.5.7/dist/l10n/ja.js"></script>
+<script src="{{ asset('js/app.js')}}"></script>
 </body>
 </html>
