@@ -74,8 +74,18 @@ table {
 
 } //.table
 
-@media screen and (max-width: map-get($breakpoints, sm)) {
-    .table {
+.table-sticky {
+    overflow: auto;
+    height: calc(100vh - 100px);
+    border-top: 1px solid $color-bd;
 
+    .table {
+        border-top: none;
+
+        thead tr th {
+            position: sticky;
+            top: -1px;
+            border-bottom: 3px solid $color-bd;
+        }
     }
 }
