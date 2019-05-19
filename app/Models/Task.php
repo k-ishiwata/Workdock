@@ -18,6 +18,14 @@ class Task extends Model
     // Date型で扱う
     protected $dates = ['due_at', 'start_at'];
 
+    /**
+     * デフォルト値
+     * @var array
+     */
+    protected $attributes = [
+        'status_id' => 1,
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

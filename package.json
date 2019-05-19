@@ -20,5 +20,8 @@
         "sass": "^1.15.2",
         "sass-loader": "^7.1.0"
     },
-    "dependencies": {}
+    "dependencies": {
+        "remixicon": "^1.2.0",
+        "unstated-next": "^1.1.0"
+    }
 }

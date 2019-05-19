@@ -17,7 +17,7 @@ class TaskController extends Controller
     {
         return Task::with(['user' => function($q) {
             $q->select('id', 'display_name');
-        }])->get();
+        }])->orderBy('id', 'desc')->get();
     }
     
     /**
