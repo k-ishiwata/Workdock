@@ -55,13 +55,16 @@ class TaskController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Task  $task
-     * @return \Illuminate\Http\Response
+     * @param Task $task
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
     public function destroy(Task $task)
     {
-        return $task->delete();
+        if ($task->delete()) {
+            return response()->json(null, 204);
+        } else {
+            return response()->json(null, 409);
+        }
     }
 }

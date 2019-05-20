@@ -44,7 +44,20 @@ export default () => {
         setIsInputOpen(false);
     };
 
-    return { tasks, setTasks, isInputOpen, setIsInputOpen, priority, status, handleAdd };
+    const handleDelete = async (task) => {
+        await axios.delete('/api/tasks/' + task.id)
+            .then(response => {
+                const newTasks = [...tasks];
+                const index = newTasks.indexOf(task);
+
+                newTasks.splice(index, 1);
+                setTasks(newTasks);
+            }).catch(error => {
+            });
+
+    };
+
+    return { tasks, setTasks, isInputOpen, setIsInputOpen, priority, status, handleAdd, handleDelete };
 }
 
 

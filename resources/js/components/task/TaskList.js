@@ -57,9 +57,9 @@ export default () => {
             <td>{task.user ? task.user.display_name : ''}</td>
             <td>{timeFormat(task.time)}</td>
             <td className="cell-action">
-                <a href="#" title="詳細"><i className="remixicon-file-text-line"></i></a>
-                <a href="#" title="編集"><i className="remixicon-file-edit-line"></i></a>
-                <a href="#" title="削除"><i className="remixicon-close-line"></i></a>
+                <a title="詳細"><i className="remixicon-file-text-line"></i></a>
+                <a title="編集"><i className="remixicon-file-edit-line"></i></a>
+                <a title="削除" onClick={() => container.handleDelete(task)}><i className="remixicon-close-line"></i></a>
             </td>
         </tr>;
     });
