@@ -128,7 +128,7 @@ form *:focus {
                 text-align: right;
                 font-weight: bold;
                 font-size: .8rem;
-                padding-top: 13px;
+                padding-top: 10px;
             }
 
             .form-input {
@@ -138,8 +138,8 @@ form *:focus {
                     padding-top: 13px;
                 }
             }
-        }
-    }
+        } // .input-group
+    } // &.is-horizontal
 
     .form-inline {
         display: flex;

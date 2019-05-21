@@ -16,12 +16,14 @@ $panel-padding: 25px;
         background: #F5F8FA;
         font-size: 1rem;
         padding: 15px;
-        margin: (-$panel-padding) (-$panel-padding) $panel-padding;
+        margin: (-$panel-padding) (-$panel-padding) 0;
         text-align: center;
         border-bottom: 1px solid $color-bd;
     }
 
     .panel-body {
+        padding: 25px 25px 5px;
+
         &.is-full {
             margin: -$panel-padding -$panel-padding 0;
         }

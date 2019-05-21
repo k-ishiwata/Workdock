@@ -5,51 +5,20 @@ import useTask from './TaskContainer';
 
 import TaskList from './TaskList';
 import TaskSearch from './TaskSearch';
-import TaskInput from './TaskInput';
+import InputModal from './TaskInputModal';
+import DeleteModal from './TaskDeleteModal';
 
-// import axios from 'axios';
 // import update from 'immutability-helper';
 
 export const TaskContainer = createContainer(useTask);
-
-/*
-export default class Task extends Component {
-
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            isInputOpen: false
-        };
-    }
-
-    handleInputPopup(isShow) {
-        console.log(isShow);
-
-        this.setState({
-            isInputOpen: true
-        });
-
-    }
-
-    render() {
-        return (
-            <div>
-                <TaskSearch />
-                <TaskList handleOpen={() => this.handleInputPopup()} />
-                <TaskInput isShow={this.state.isInputOpen} />
-            </div>
-        );
-    }
-}
-*/
 
 const Task = () => {
     return (
         <TaskContainer.Provider>
             <TaskSearch />
             <TaskList />
-            <TaskInput />
+            <InputModal />
+            <DeleteModal />
         </TaskContainer.Provider>
     );
 };

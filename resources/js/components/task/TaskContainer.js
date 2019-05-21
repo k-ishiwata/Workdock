@@ -5,7 +5,10 @@ import axios from "axios";
 
 export default () => {
     const [tasks, setTasks] = useState([]);
-    const [isInputOpen, setIsInputOpen] = useState(false);
+    const [isInputModal, setIsInputModal] = useState(false);
+    const [isDeleteModal, setIsDeleteModal] = useState(false);
+    // 編集中のタスク
+    const [editTask, setEditTask] = useState({});
     const [priority, setPriority] = useState([
         '高', '中', '低',
     ]);
@@ -41,11 +44,11 @@ export default () => {
             }).catch(error => {
             });
 
-        setIsInputOpen(false);
+        setIsInputModal(false);
     };
 
-    const handleDelete = async (task) => {
-        await axios.delete('/api/tasks/' + task.id)
+    const handleDelete = async () => {
+        await axios.delete('/api/tasks/' + editTask.id)
             .then(response => {
                 const newTasks = [...tasks];
                 const index = newTasks.indexOf(task);
@@ -54,10 +57,22 @@ export default () => {
                 setTasks(newTasks);
             }).catch(error => {
             });
-
     };
 
-    return { tasks, setTasks, isInputOpen, setIsInputOpen, priority, status, handleAdd, handleDelete };
+    // 削除モーダル
+    const handleDeleteModal = (task) => {
+        setEditTask(task);
+        setIsDeleteModal(true);
+    };
+
+    return {
+        tasks, setTasks,
+        editTask,
+        isInputModal, setIsInputModal,
+        isDeleteModal, setIsDeleteModal,
+        priority, status,
+        handleAdd, handleDelete, handleDeleteModal
+    };
 }
 
 

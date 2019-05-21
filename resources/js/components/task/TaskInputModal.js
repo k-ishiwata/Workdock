@@ -11,7 +11,7 @@ export default () => {
     };
 
     return (
-        <div className={`overlay ${container.isInputOpen && "is-open"}`}>
+        <div className={`overlay ${container.isInputModal && "is-open"}`}>
             <div className="modal panel">
                 <h3 className="panel-title">新規登録</h3>
                 <form className="form is-horizontal" onSubmit={container.handleAdd}>
@@ -42,7 +42,7 @@ export default () => {
                         <button className="btn is-primary">保存</button>
                         <a
                             className="btn close-btn"
-                            onClick={() => container.setIsInputOpen(false)}>
+                            onClick={() => container.setIsInputModal(false)}>
                             キャンセル
                         </a>
                     </div>

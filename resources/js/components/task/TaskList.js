@@ -59,7 +59,8 @@ export default () => {
             <td className="cell-action">
                 <a title="詳細"><i className="remixicon-file-text-line"></i></a>
                 <a title="編集"><i className="remixicon-file-edit-line"></i></a>
-                <a title="削除" onClick={() => container.handleDelete(task)}><i className="remixicon-close-line"></i></a>
+                <a title="削除" onClick={() => container.handleDeleteModal(task)}><i className="remixicon-close-line"></i></a>
+                {/*<a title="削除" onClick={() => container.setIsDeleteModal(true)}><i className="remixicon-close-line"></i></a>*/}
             </td>
         </tr>;
     });
@@ -71,7 +72,7 @@ export default () => {
                 </button>
                 <button
                     className="btn is-sm is-icon is-orange"
-                    onClick={() => container.setIsInputOpen(true)}>
+                    onClick={() => container.setIsInputModal(true)}>
                     <i className="remixicon-add-circle-line"></i>新規登録
                 </button>
             </div>
