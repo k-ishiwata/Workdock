@@ -11,7 +11,7 @@ export default () => {
                 <form className="form" onSubmit={container.handleDelete}>
                     <div className="panel-body">
                         <p className="input-group align-center">
-                            ID:{container.editTask.id} を本当に削除しますか？
+                            ID:{container.task.id} を本当に削除しますか？
                         </p>
                     </div>
                     <div className="panel-footer">

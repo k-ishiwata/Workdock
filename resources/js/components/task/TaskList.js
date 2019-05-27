@@ -26,6 +26,7 @@ export default () => {
     }
      */
 
+    // Task一覧を取得
     const fetchTasks = async () => {
         await axios
             .get('/api/tasks')
@@ -58,7 +59,7 @@ export default () => {
             <td>{timeFormat(task.time)}</td>
             <td className="cell-action">
                 <a title="詳細"><i className="remixicon-file-text-line"></i></a>
-                <a title="編集"><i className="remixicon-file-edit-line"></i></a>
+                <a title="編集" onClick={() => container.handleEditModal(task)}><i className="remixicon-file-edit-line"></i></a>
                 <a title="削除" onClick={() => container.handleDeleteModal(task)}><i className="remixicon-close-line"></i></a>
                 {/*<a title="削除" onClick={() => container.setIsDeleteModal(true)}><i className="remixicon-close-line"></i></a>*/}
             </td>
@@ -72,7 +73,7 @@ export default () => {
                 </button>
                 <button
                     className="btn is-sm is-icon is-orange"
-                    onClick={() => container.setIsInputModal(true)}>
+                    onClick={container.handleAddModal}>
                     <i className="remixicon-add-circle-line"></i>新規登録
                 </button>
             </div>

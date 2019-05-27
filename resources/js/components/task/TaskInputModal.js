@@ -4,25 +4,38 @@ import { TaskContainer } from './Task';
 export default () => {
     const container = TaskContainer.useContainer();
 
-    const [newTask, setNewTask] = useState({});
-
-    const handleChange = () => {
-        console.log(newTask.name);
+    const handleChange = e => {
+        const { name, value } = e.target;
+        container.setTask({ ...container.task, [name]: value });
     };
+
+    const handleSubmit = (e) => {
+        container.handleAdd(e, 'add');
+    };
+
+    // const formSubmit = container.editTask === {} ? container.handleAdd : container.handleEdit;
 
     return (
         <div className={`overlay ${container.isInputModal && "is-open"}`}>
             <div className="modal panel">
                 <h3 className="panel-title">新規登録</h3>
-                <form className="form is-horizontal" onSubmit={container.handleAdd}>
+                {/*<form className="form is-horizontal" onSubmit={container.handleAdd}>*/}
+                <form className="form is-horizontal">
                     <div className="panel-body">
+                        <input type="hidden" name="id" value={container.task.id || ''} />
                         <div className="input-group">
                             <label className="form-label">件名</label>
-                            <input type="text" name="title" className="form-input" />
+                            <input type="text" name="title" className="form-input"
+                                   value={container.task.title || ''}
+                                   onChange={handleChange}
+                            />
                         </div>
                         <div className="input-group">
                             <label className="form-label">期日</label>
-                            <input type="text" name="due_at" className="form-input date-time-input" />
+                            <input type="text" name="due_at" className="form-input date-time-input"
+                                   value={container.task.due_at || ''}
+                                   onChange={handleChange}
+                            />
                         </div>
                         <div className="input-group">
                             <label className="form-label">担当</label>
@@ -39,7 +52,11 @@ export default () => {
                         </div>
                     </div>
                     <div className="panel-footer">
-                        <button className="btn is-primary">保存</button>
+                        <button
+                            className="btn is-primary"
+                            onClick={container.handleSubmit}>
+                            保存
+                        </button>
                         <a
                             className="btn close-btn"
                             onClick={() => container.setIsInputModal(false)}>
