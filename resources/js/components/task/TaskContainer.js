@@ -18,6 +18,12 @@ export default () => {
     const [priority, setPriority] = useState([
         '高', '中', '低',
     ]);
+
+    const [alert, setAlert] = useState({
+        isShow: false,
+        message: '',
+        status: ''
+    });
     const [status, setStatus] = useState([
         {},
         {
@@ -51,7 +57,16 @@ export default () => {
                 setTask(initialTaskState);
 
                 setIsDeleteModal(false);
+                setAlert({
+                    isShow: true,
+                    message: 'データを削除しました。'
+                });
             }).catch(error => {
+                setAlert({
+                    isShow: true,
+                    message: 'データの削除に失敗しました。',
+                    status: 'error'
+                });
             });
     };
 
@@ -71,7 +86,16 @@ export default () => {
                     // const newTask = response.data;
                     // setTasks(tasks.map(t => (t.id === newTask.id ? newTask : t)));
 
+                    setAlert({
+                        isShow: true,
+                        message: 'データを更新しました。'
+                    });
                 }).catch(error => {
+                    setAlert({
+                        isShow: true,
+                        message: 'データの更新に失敗しました。',
+                        status: 'error'
+                    });
                 });
 
             // Object.assign(task, newTask);
@@ -84,7 +108,17 @@ export default () => {
                     // setTasks([response.data, ...tasks]);
                     // 先頭に追加
                     setTasks(update(tasks, {$unshift: [response.data]}));
+
+                    setAlert({
+                        isShow: true,
+                        message: 'データを登録しました。'
+                    });
                 }).catch(error => {
+                    setAlert({
+                        isShow: true,
+                        message: 'データの登録に失敗しました。',
+                        status: 'error'
+                    });
                 });
         }
 
@@ -113,6 +147,7 @@ export default () => {
         tasks, setTasks,
         isInputModal, setIsInputModal,
         isDeleteModal, setIsDeleteModal,
+        alert, setAlert,
         priority, status,
         handleSubmit,   // 保存処理
         handleDelete,   // 削除処理

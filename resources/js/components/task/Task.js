@@ -7,14 +7,14 @@ import TaskList from './TaskList';
 import TaskSearch from './TaskSearch';
 import InputModal from './TaskInputModal';
 import DeleteModal from './TaskDeleteModal';
-
-// import update from 'immutability-helper';
+import Alert from '../common/Alert';
 
 export const TaskContainer = createContainer(useTask);
 
 const Task = () => {
     return (
         <TaskContainer.Provider>
+            <Alert />
             <TaskSearch />
             <TaskList />
             <InputModal />
