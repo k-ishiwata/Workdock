@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
 import { TaskContainer } from './Task';
+import dayjs from 'dayjs';
 
 // 分数値を時間表示に
 function timeFormat(num) {
@@ -48,14 +49,18 @@ export default () => {
             <td className="cell-do"><i className="remixicon-play-fill"></i></td>
             <td>{( '0000' + task.id ).slice( -4 )}</td>
             <td className="cell-status">
-                <span className={'label is-' + container.status[task.status_id].color}>{container.status[task.status_id].label}</span>
+                <span className={'label is-' + container.status[task.status_id].color}>
+                    {container.status[task.status_id].label}
+                </span>
             </td>
-            <td className={'cell-priority ' + (task.priority_id == 1 ? 'is-high' : null)}>{container.priority[task.priority_id-1]}</td>
+            <td className={'cell-priority ' + (task.priority_id == 1 ? 'is-high' : null)}>
+                {container.priority[task.priority_id-1]}
+            </td>
             <td className="cell-title">{task.title}</td>
             <td><a href="#">プロジェクト1</a></td>
-            <td>17/02/20</td>
-            <td>17/02/01</td>
-            <td>{task.user ? task.user.display_name : ''}</td>
+            <td>{task.due_at ? dayjs(task.due_at).format('YY/MM/DD') : ''}</td>
+            <td>{dayjs(task.created_at).format('YY/MM/DD')}</td>
+            <td>{task.user ? task.user.display_name : '未設定'}</td>
             <td>{timeFormat(task.time)}</td>
             <td className="cell-action">
                 <a title="詳細"><i className="remixicon-file-text-line"></i></a>
@@ -86,7 +91,7 @@ export default () => {
                         <th className="cell-status">状態</th>
                         <th className="cell-priority">優先度</th>
                         <th className="cell-title">件名</th>
-                        <th>プロジェクト</th>
+                        <th className="cell-project">プロジェクト</th>
                         <th>期日</th>
                         <th>登録日</th>
                         <th>担当</th>

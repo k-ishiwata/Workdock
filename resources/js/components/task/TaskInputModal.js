@@ -31,6 +31,28 @@ export default () => {
                             />
                         </div>
                         <div className="input-group">
+                            <label className="form-label">状態</label>
+                            <div className="form-input">
+                                <div className="select-box">
+                                    <select name="status_id" value={container.task.status_id} onChange={handleChange}>
+                                    {
+                                        container.status.map((item, index) => {
+                                            if (index !== 0) {
+                                                return (
+                                                    <option
+                                                        key={index}
+                                                        value={index}>
+                                                        {item.label}
+                                                    </option>
+                                                );
+                                            }
+                                        })
+                                    }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="input-group">
                             <label className="form-label">期日</label>
                             <input type="text" name="due_at" className="form-input date-time-input"
                                    value={container.task.due_at || ''}

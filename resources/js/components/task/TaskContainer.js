@@ -78,8 +78,6 @@ export default () => {
             await axios
                 .put('/api/tasks/' + task.id, task)
                 .then(response => {
-
-
                     const index = tasks.findIndex(x => x.id === response.data.id);
                     setTasks(update(tasks, {[index]: {$set: task}}));
 

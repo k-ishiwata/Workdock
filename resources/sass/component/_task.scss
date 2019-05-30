@@ -7,7 +7,7 @@
     height: calc(100vh - 300px);
 
     > table {
-        min-width: 1100px;
+        min-width: 1200px;
     }
 
     [class^="remixicon-"] {
@@ -44,6 +44,10 @@
             color: map-get($colors, "red");
             font-weight: bold;
         }
+    }
+
+    .cell-project {
+        width: 150px;
     }
 
     .cell-title {
