@@ -28,20 +28,36 @@ export default () => {
      */
 
     // Task一覧を取得
-    const fetchTasks = async () => {
+    const fetchData = async () => {
         await axios
             .get('/api/tasks')
             .then(response => {
-                container.setTasks(response.data);
+                container.setTasks(response.data.data);
             }).catch(error => {
                 // this.setState({
                 //     error: true
                 // });
             });
+
+
+
+        await axios
+            .get('/api/users')
+            .then(response => {
+                container.setUsers(response.data.data);
+            }).catch(error => {
+                // this.setState({
+                //     error: true
+                // });
+            });
+
+
     };
 
     useEffect(() => {
-        fetchTasks();
+        fetchData();
+
+
     }, []);
 
     const list = container.tasks.map((task) => {

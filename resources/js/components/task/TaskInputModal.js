@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { TaskContainer } from './Task';
 
 export default () => {
@@ -7,10 +7,6 @@ export default () => {
     const handleChange = e => {
         const { name, value } = e.target;
         container.setTask({ ...container.task, [name]: value });
-    };
-
-    const handleSubmit = (e) => {
-        container.handleAdd(e, 'add');
     };
 
     // const formSubmit = container.editTask === {} ? container.handleAdd : container.handleEdit;
@@ -34,7 +30,10 @@ export default () => {
                             <label className="form-label">状態</label>
                             <div className="form-input">
                                 <div className="select-box">
-                                    <select name="status_id" value={container.task.status_id} onChange={handleChange}>
+                                    <select name="status_id"
+                                            value={container.task.status_id}
+                                            onChange={handleChange}
+                                    >
                                     {
                                         container.status.map((item, index) => {
                                             if (index !== 0) {
@@ -63,11 +62,22 @@ export default () => {
                             <label className="form-label">担当</label>
                             <div className="form-input">
                                <div className="select-box">
-                                    <select name="user_id">
+                                    <select name="user_id"
+                                            value={container.task.user_id || ''}
+                                            onChange={handleChange}
+                                    >
                                         <option>担当者</option>
-                                        <option value="1">山田太郎</option>
-                                        <option value="2">田中一郎</option>
-                                        <option value="3">鈴木光一</option>
+                                        {
+                                            container.users.map((item) => {
+                                                return (
+                                                    <option
+                                                        key={item.id}
+                                                        value={item.id}>
+                                                        {item.display_name}
+                                                    </option>
+                                                );
+                                            })
+                                        }
                                     </select>
                                </div>
                             </div>

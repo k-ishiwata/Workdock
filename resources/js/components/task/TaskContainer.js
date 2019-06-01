@@ -5,11 +5,14 @@ import update from 'immutability-helper';
 export default () => {
     const initialTaskState = {
         title: '',
-        // status_id: 1,
+        status_id: 0,
+
         // time: 0,
-        due_at: ''
+        due_at: '',
+        user_id: 0,
     };
     const [tasks, setTasks] = useState([]);
+    const [users, setUsers] = useState([]);
     const [isInputModal, setIsInputModal] = useState(false);
     const [isDeleteModal, setIsDeleteModal] = useState(false);
     const [task, setTask] = useState(initialTaskState);
@@ -22,7 +25,8 @@ export default () => {
     const [alert, setAlert] = useState({
         isShow: false,
         message: '',
-        status: ''
+        status: '',
+        // user: null
     });
     const [status, setStatus] = useState([
         {},
@@ -78,8 +82,9 @@ export default () => {
             await axios
                 .put('/api/tasks/' + task.id, task)
                 .then(response => {
-                    const index = tasks.findIndex(x => x.id === response.data.id);
-                    setTasks(update(tasks, {[index]: {$set: task}}));
+                    const data = response.data.data;
+                    const index = tasks.findIndex(x => x.id === data.id);
+                    setTasks(update(tasks, {[index]: {$set: data}}));
 
                     // const newTask = response.data;
                     // setTasks(tasks.map(t => (t.id === newTask.id ? newTask : t)));
@@ -97,7 +102,6 @@ export default () => {
                 });
 
             // Object.assign(task, newTask);
-
             // console.log("腰新");
         } else {
             await axios
@@ -105,7 +109,7 @@ export default () => {
                 .then(response => {
                     // setTasks([response.data, ...tasks]);
                     // 先頭に追加
-                    setTasks(update(tasks, {$unshift: [response.data]}));
+                    setTasks(update(tasks, {$unshift: [response.data.data]}));
 
                     setAlert({
                         isShow: true,
@@ -143,6 +147,7 @@ export default () => {
     return {
         task, setTask,
         tasks, setTasks,
+        users, setUsers,
         isInputModal, setIsInputModal,
         isDeleteModal, setIsDeleteModal,
         alert, setAlert,

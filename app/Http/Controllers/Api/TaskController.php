@@ -5,52 +5,55 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Task;
 use Illuminate\Http\Request;
+use App\Http\Resources\TaskResource;
 
 class TaskController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index()
     {
-        return Task::with(['user' => function($q) {
+        /*
+        $tasks = Task::with(['user' => function($q) {
             $q->select('id', 'display_name');
         }])->orderBy('id', 'desc')->get();
-    }
-    
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        return Task::create($request->all());
+
+        return TaskResource::collection($tasks);
+        */
+
+        return TaskResource::collection(Task::OrderBy('id', 'desc')->get());
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Task  $task
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return TaskResource
+     */
+    public function store(Request $request)
+    {
+        $task = Task::create($request->all());
+        return TaskResource::make($task);
+    }
+
+    /**
+     * @param Task $task
+     * @return TaskResource
      */
     public function show(Task $task)
     {
-        return $task;
+        return TaskResource::make($task);
+//        return $task;
     }
 
     /**
      * @param Request $request
      * @param Task $task
-     * @return Task
+     * @return TaskResource
      */
     public function update(Request $request, Task $task)
     {
         $task->update($request->all());
-        return $task;
+        return TaskResource::make($task);
     }
 
     /**
