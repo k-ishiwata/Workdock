@@ -10,6 +10,7 @@ export default () => {
         // time: 0,
         due_at: '',
         user_id: 0,
+        priority_id: 0
     };
     const [tasks, setTasks] = useState([]);
     const [users, setUsers] = useState([]);
@@ -19,7 +20,7 @@ export default () => {
     // 編集中のタスク
     const [editTask, setEditTask] = useState(initialTaskState);
     const [priority, setPriority] = useState([
-        '高', '中', '低',
+        null, '高', '中', '低',
     ]);
 
     const [alert, setAlert] = useState({

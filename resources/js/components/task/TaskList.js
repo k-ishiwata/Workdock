@@ -56,8 +56,6 @@ export default () => {
 
     useEffect(() => {
         fetchData();
-
-
     }, []);
 
     const list = container.tasks.map((task) => {
@@ -70,7 +68,7 @@ export default () => {
                 </span>
             </td>
             <td className={'cell-priority ' + (task.priority_id == 1 ? 'is-high' : null)}>
-                {container.priority[task.priority_id-1]}
+                {container.priority[task.priority_id]}
             </td>
             <td className="cell-title">{task.title}</td>
             <td><a href="#">プロジェクト1</a></td>

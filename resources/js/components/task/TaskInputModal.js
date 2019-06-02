@@ -82,6 +82,29 @@ export default () => {
                                </div>
                             </div>
                         </div>
+                        <div className="input-group">
+                            <label className="form-label">優先度</label>
+                            <div className="form-input">
+                                <div className="select-box">
+                                    <select name="priority_id"
+                                            value={container.task.priority_id || ''}
+                                            onChange={handleChange}
+                                    >
+                                        {
+                                            container.priority.map((item, index) => {
+                                                return (
+                                                    <option
+                                                        key={index}
+                                                        value={index}>
+                                                        {item}
+                                                    </option>
+                                                );
+                                            })
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div className="panel-footer">
                         <button

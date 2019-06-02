@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Task;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Resources\TaskResource;
 
@@ -14,15 +15,13 @@ class TaskController extends Controller
      */
     public function index()
     {
-        /*
-        $tasks = Task::with(['user' => function($q) {
-            $q->select('id', 'display_name');
-        }])->orderBy('id', 'desc')->get();
 
+//        $tasks = Task::with(['user' => function($q) {
+//            $q->select('id', display_name');
+//        }])->orderBy('id', 'desc')->get();
+
+        $tasks = Task::with('user')->orderBy('id', 'desc')->get();
         return TaskResource::collection($tasks);
-        */
-
-        return TaskResource::collection(Task::OrderBy('id', 'desc')->get());
     }
 
     /**
