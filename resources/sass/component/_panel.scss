@@ -22,7 +22,7 @@ $panel-padding: 25px;
     }
 
     .panel-body {
-        padding: 25px 25px 5px;
+        padding: 25px 0 5px;
 
         &.is-full {
             margin: -$panel-padding -$panel-padding 0;

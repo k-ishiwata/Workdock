@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Task;
 use App\Models\User;
+use App\Http\Requests\TaskRequest;
 use Illuminate\Http\Request;
+
 use App\Http\Resources\TaskResource;
 
 class TaskController extends Controller
@@ -25,10 +27,10 @@ class TaskController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param TaskRequest $request
      * @return TaskResource
      */
-    public function store(Request $request)
+    public function store(TaskRequest $request)
     {
         $task = Task::create($request->all());
         return TaskResource::make($task);
@@ -41,15 +43,14 @@ class TaskController extends Controller
     public function show(Task $task)
     {
         return TaskResource::make($task);
-//        return $task;
     }
 
     /**
-     * @param Request $request
+     * @param TaskRequest $request
      * @param Task $task
      * @return TaskResource
      */
-    public function update(Request $request, Task $task)
+    public function update(TaskRequest $request, Task $task)
     {
         $task->update($request->all());
         return TaskResource::make($task);

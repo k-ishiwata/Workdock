@@ -72,6 +72,13 @@ table {
         }
     }
 
+    .cell-action {
+        a {
+            text-decoration: none;
+            display: inline-block;
+        }
+    }
+
 } //.table
 
 .table-sticky {

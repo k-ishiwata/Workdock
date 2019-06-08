@@ -5,7 +5,7 @@ import update from 'immutability-helper';
 export default () => {
     const initialTaskState = {
         title: '',
-        status_id: 0,
+        status_id: 1,
 
         // time: 0,
         due_at: '',
@@ -94,10 +94,16 @@ export default () => {
                         isShow: true,
                         message: 'データを更新しました。'
                     });
-                }).catch(error => {
+                })
+                .catch(error => {
+                    let errorMessage = 'データの更新に失敗しました。';
+
+                    if (error.response) {
+                        errorMessage = error.response.data.errorMessages[0];
+                    }
                     setAlert({
                         isShow: true,
-                        message: 'データの更新に失敗しました。',
+                        message: errorMessage,
                         status: 'error'
                     });
                 });
@@ -117,9 +123,14 @@ export default () => {
                         message: 'データを登録しました。'
                     });
                 }).catch(error => {
+                    let errorMessage = 'データの更新に失敗しました。';
+
+                    if (error.response) {
+                        errorMessage = error.response.data.errors[0];
+                    }
                     setAlert({
                         isShow: true,
-                        message: 'データの登録に失敗しました。',
+                        message: errorMessage,
                         status: 'error'
                     });
                 });
