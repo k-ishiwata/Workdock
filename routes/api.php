@@ -21,3 +21,5 @@ Route::apiResources([
     'tasks' => 'Api\TaskController',
     'users' => 'Api\UserController'
 ]);
+
+Route::get('projects', 'Api\ProjectController@index')->name('project.index');

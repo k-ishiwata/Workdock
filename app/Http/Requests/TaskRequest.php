@@ -32,9 +32,9 @@ class TaskRequest extends FormRequest
 
     protected function failedValidation( Validator $validator )
     {
-        $response['data']    = [];
-        $response['status']  = 'NG';
-        $response['summary'] = 'Failed validation.';
+//        $response['data']    = [];
+//        $response['status']  = 'NG';
+//        $response['summary'] = 'Failed validation.';
 //        $response['errors']  = $validator->errors()->toArray();
         $response['errors']  = $validator->errors()->all();
 

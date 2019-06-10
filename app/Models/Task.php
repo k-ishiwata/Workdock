@@ -7,13 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Task extends Model
 {
     protected $fillable = [
-        'title', 'status_id', 'priority_id', 'due_at', 'start_at', 'time', 'user_id'
+        'title', 'status_id', 'priority_id', 'project_id', 'due_at', 'start_at', 'time', 'user_id'
     ];
     
-//    protected $casts = [
+    protected $casts = [
+        'project_id' => 'integer'
 //        'due_at' => 'datetime',
 //        'start_at' => 'datetime'
-//    ];
+    ];
     
     // Date型で扱う
     protected $dates = ['due_at', 'start_at'];
@@ -29,5 +30,10 @@ class Task extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
     }
 }

@@ -105,6 +105,31 @@ export default () => {
                                 </div>
                             </div>
                         </div>
+
+                        <div className="input-group">
+                            <label className="form-label">プロジェクト</label>
+                            <div className="form-input">
+                                <div className="select-box">
+                                    <select name="project_id"
+                                            value={container.task.project_id || ''}
+                                            onChange={handleChange}
+                                    >
+                                        <option></option>
+                                        {
+                                            container.projects.map((item) => {
+                                                return (
+                                                    <option
+                                                        key={item.id}
+                                                        value={item.id}>
+                                                        {item.title}
+                                                    </option>
+                                                );
+                                            })
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div className="panel-footer">
                         <button

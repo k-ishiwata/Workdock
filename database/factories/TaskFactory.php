@@ -10,6 +10,7 @@ $factory->define(Task::class, function (Faker $faker) {
         'title' => $faker->realText($faker->numberBetween(15,40)),
         'status_id' => $faker->numberBetween(1, 4),
         'priority_id' => $faker->numberBetween(1, 3),
+        'project_id' => $faker->boolean(80) ? $faker->numberBetween(1, 3) : null,
         'user_id' => $faker->numberBetween(1, 3),
 //        'price' => $faker->numberBetween($min = 600, $max = 4000),
 //        'due_at' => $faker->dateTime($max = 'now', $timezone = date_default_timezone_get()),

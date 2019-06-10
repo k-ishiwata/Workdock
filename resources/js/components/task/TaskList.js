@@ -29,29 +29,42 @@ export default () => {
 
     // Task一覧を取得
     const fetchData = async () => {
-        await axios
-            .get('/api/tasks')
-            .then(response => {
-                container.setTasks(response.data.data);
-            }).catch(error => {
-                // this.setState({
-                //     error: true
-                // });
-            });
-
-
 
         await axios
             .get('/api/users')
             .then(response => {
                 container.setUsers(response.data.data);
             }).catch(error => {
-                // this.setState({
-                //     error: true
-                // });
+                container.setAlert({
+                    isShow: true,
+                    message: 'データの取得に失敗しました。',
+                    status: 'error'
+                });
             });
 
+        await axios
+            .get('/api/projects')
+            .then(response => {
+                container.setProjects(response.data.data);
+            }).catch(error => {
+                container.setAlert({
+                    isShow: true,
+                    message: 'データの取得に失敗しました。',
+                    status: 'error'
+                });
+            });
 
+        await axios
+            .get('/api/tasks')
+            .then(response => {
+                container.setTasks(response.data.data);
+            }).catch(error => {
+                container.setAlert({
+                    isShow: true,
+                    message: 'データの取得に失敗しました。',
+                    status: 'error'
+                });
+            });
     };
 
     useEffect(() => {
@@ -71,7 +84,12 @@ export default () => {
                 {container.priority[task.priority_id]}
             </td>
             <td className="cell-title">{task.title}</td>
-            <td><a href="#">プロジェクト1</a></td>
+            <td><a href={'/project/' + task.project_id}>
+                {
+                    task.project_id ?
+                        container.projects.find(x => x.id === task.project_id).title : ''
+                }
+            </a></td>
             <td>{task.due_at ? dayjs(task.due_at).format('YY/MM/DD') : ''}</td>
             <td>{dayjs(task.created_at).format('YY/MM/DD')}</td>
             <td>{task.user ? task.user.display_name : '未設定'}</td>

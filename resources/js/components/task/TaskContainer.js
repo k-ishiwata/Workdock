@@ -14,6 +14,7 @@ export default () => {
     };
     const [tasks, setTasks] = useState([]);
     const [users, setUsers] = useState([]);
+    const [projects, setProjects] = useState([]);
     const [isInputModal, setIsInputModal] = useState(false);
     const [isDeleteModal, setIsDeleteModal] = useState(false);
     const [task, setTask] = useState(initialTaskState);
@@ -99,7 +100,7 @@ export default () => {
                     let errorMessage = 'データの更新に失敗しました。';
 
                     if (error.response) {
-                        errorMessage = error.response.data.errorMessages[0];
+                        errorMessage = error.response.data.errors[0];
                     }
                     setAlert({
                         isShow: true,
@@ -160,6 +161,7 @@ export default () => {
         task, setTask,
         tasks, setTasks,
         users, setUsers,
+        projects, setProjects,
         isInputModal, setIsInputModal,
         isDeleteModal, setIsDeleteModal,
         alert, setAlert,
