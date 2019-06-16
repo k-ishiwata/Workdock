@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Carbon\Carbon;
 
 class TaskResource extends JsonResource
 {
@@ -20,12 +21,13 @@ class TaskResource extends JsonResource
             'status_id' => $this->status_id,
             'priority_id' => $this->priority_id,
             'project_id' => $this->project_id,
-            'due_at' => $this->due_at,
+            'due_at' => $this->due_at ? $this->due_at->format('Y-m-d H:i:s') : null,
+//            'due_at' => $this->due_at,
             'start_at' => $this->start_at,
             'time' => $this->time,
             'user_id' => $this->user_id,
+            'created_at' => $this->created_at->format('Y-m-d H:i:s'),
             'user' => UserResource::make($this->user)
         ];
-//        return parent::toArray($request);
     }
 }

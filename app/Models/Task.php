@@ -9,15 +9,12 @@ class Task extends Model
     protected $fillable = [
         'title', 'status_id', 'priority_id', 'project_id', 'due_at', 'start_at', 'time', 'user_id'
     ];
-    
+
     protected $casts = [
-        'project_id' => 'integer'
-//        'due_at' => 'datetime',
-//        'start_at' => 'datetime'
+        'project_id' => 'integer',
+        'due_at' => 'datetime:Y-m-d H:i',
+        'start_at' => 'datetime:Y-m-d H:i'
     ];
-    
-    // Date型で扱う
-    protected $dates = ['due_at', 'start_at'];
 
     /**
      * デフォルト値

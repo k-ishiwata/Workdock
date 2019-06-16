@@ -1,5 +1,6 @@
 import React from 'react';
 import { TaskContainer } from './Task';
+import dayjs from 'dayjs';
 
 export default () => {
     const container = TaskContainer.useContainer();
@@ -53,9 +54,12 @@ export default () => {
                         </div>
                         <div className="input-group">
                             <label className="form-label">期日</label>
-                            <input type="text" name="due_at" className="form-input date-time-input"
-                                   value={container.task.due_at || ''}
-                                   onChange={handleChange}
+                            <input type="text" name="due_at" className="form-input data-input" readOnly
+                                   value={
+                                       container.task.due_at ?
+                                           dayjs(container.task.due_at).format('YYYY-MM-DD HH:mm') : ''
+                                   }
+                                   onBlur={handleChange}
                             />
                         </div>
                         <div className="input-group">

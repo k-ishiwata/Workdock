@@ -22,6 +22,7 @@
     },
     "dependencies": {
         "dayjs": "^1.8.14",
+        "flatpickr": "^4.6.1",
         "immutability-helper": "^3.0.0",
         "remixicon": "^1.2.0",
         "unstated-next": "^1.1.0"

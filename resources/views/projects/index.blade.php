@@ -58,7 +58,7 @@
     <div id="delete-modal" class="overlay">
         <div class="modal panel">
             <h3 class="panel-title">削除確認</h3>
-            <form method="POST" class="form" id="submiteDalete" action="/projects">
+            <form method="POST" class="form" id="delete-form" action="/projects">
                 @method('DELETE')
                 @csrf
                 <div class="panel-body">
