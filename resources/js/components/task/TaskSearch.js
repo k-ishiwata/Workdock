@@ -1,6 +1,14 @@
 import React from 'react';
+import { TaskContainer } from './Task';
 
 export default () => {
+    const container = TaskContainer.useContainer();
+
+    const handleChange = e => {
+        const { name, value } = e.target;
+        container.setSearchQuery({ ...container.searchQuery, [name]: value });
+    };
+
     return (
         <div className="search-panel toggle-block is-open">
             <h3 className="title toggle-btn">
@@ -29,21 +37,45 @@ export default () => {
                         </div>
                         <div className="input-group">
                             <div className="select-box" data-placeholder="プロジェクト選択">
-                                <select name="project">
-                                    <option>プロジェクト選択</option>
-                                    <option value="B">Workdock</option>
-                                    <option value="O">ポータルサイト</option>
-                                    <option value="AB">ランディングページ</option>
+                                <select
+                                    name="project_id"
+                                    value={container.searchQuery.project_id}
+                                    onChange={handleChange}
+                                >
+                                    <option value="">プロジェクト選択</option>
+                                    {
+                                        container.projects.map((item) => {
+                                            return (
+                                                <option
+                                                    key={item.id}
+                                                    value={item.id}>
+                                                    {item.title}
+                                                </option>
+                                            );
+                                        })
+                                    }
                                 </select>
                             </div>
                         </div>
                         <div className="input-group">
                             <div className="select-box">
-                                <select name="project">
-                                    <option>担当者</option>
-                                    <option value="A">山田太郎</option>
-                                    <option value="B">田中一郎</option>
-                                    <option value="O">鈴木光一</option>
+                                <select
+                                    name="user_id"
+                                    value={container.searchQuery.user_id}
+                                    onChange={handleChange}
+                                >
+                                    <option value="">担当者</option>
+                                    {
+                                        container.users.map((item) => {
+                                            return (
+                                                <option
+                                                    key={item.id}
+                                                    value={item.id}>
+                                                    {item.display_name}
+                                                </option>
+                                            );
+                                        })
+                                    }
                                 </select>
                             </div>
                         </div>

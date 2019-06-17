@@ -18,6 +18,8 @@ export default () => {
     const [isInputModal, setIsInputModal] = useState(false);
     const [isDeleteModal, setIsDeleteModal] = useState(false);
     const [task, setTask] = useState(initialTaskState);
+    // 検索キーワード
+    const [searchQuery, setSearchQuery] = useState({});
     // 編集中のタスク
     const [editTask, setEditTask] = useState(initialTaskState);
     const [priority, setPriority] = useState([
@@ -157,11 +159,34 @@ export default () => {
         setIsInputModal(true);
     };
 
+    // 絞り込み検索
+    const filterTask = () => {
+        let tmpTasks = tasks;
+
+        if (searchQuery.project_id) {
+            tmpTasks = tmpTasks.filter(item => item.project_id === parseInt(searchQuery.project_id));
+        }
+
+        if (searchQuery.user_id) {
+            tmpTasks = tmpTasks.filter(item => {
+                if (item.user) {
+                    return item.user.id === parseInt(searchQuery.user_id);
+                } else {
+                    return false;
+                }
+            });
+        }
+
+        return tmpTasks;
+        // return tasks;
+    };
+
     return {
         task, setTask,
         tasks, setTasks,
         users, setUsers,
         projects, setProjects,
+        searchQuery, setSearchQuery,
         isInputModal, setIsInputModal,
         isDeleteModal, setIsDeleteModal,
         alert, setAlert,
@@ -169,7 +194,8 @@ export default () => {
         handleSubmit,   // 保存処理
         handleDelete,   // 削除処理
         // モーダル表示
-        handleDeleteModal, handleEditModal, handleAddModal
+        handleDeleteModal, handleEditModal, handleAddModal,
+        filterTask
     };
 }
 

@@ -71,9 +71,15 @@ export default () => {
         fetchData();
     }, []);
 
-    const list = container.tasks.map((task) => {
+    const handleReload = () => {
+        fetchData();
+    };
+
+    const list = container.filterTask().map((task) => {
         return <tr key={task.id}>
-            <td className="cell-do"><i className="remixicon-play-fill"></i></td>
+            <td className="cell-do">
+                {task.user ? <i className="remixicon-play-fill"></i> : ''}
+            </td>
             <td>{( '0000' + task.id ).slice( -4 )}</td>
             <td className="cell-status">
                 <span className={'label is-' + container.status[task.status_id].color}>
@@ -105,7 +111,11 @@ export default () => {
     return (
         <>
             <div className="task-head">
-                <button className="btn is-sm is-icon" id="refresh-btn">
+                <button
+                    className="btn is-sm is-icon"
+                    id="refresh-btn"
+                    onClick={handleReload}
+                >
                     <i className="remixicon-refresh-line"></i>更新
                 </button>
                 <button

@@ -15,10 +15,6 @@
                             <label class="form-label">プロジェクト名</label>
                             <input type="text" name="title" value="{{ $project->title }}" class="form-input">
                         </div>
-
-                        <div class="input-group">
-                            <input class="data-input" type="text" placeholder="Select Date.." readonly="readonly">
-                        </div>
                     </div>
                     <div class="panel-footer">
                         <button class="btn is-primary">保　存</button>
