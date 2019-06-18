@@ -33,7 +33,11 @@ export default () => {
 
                     <div className="form-inline">
                         <div className="input-group">
-                            <input type="text" placeholder="キーワード検索" />
+                            <input type="text"
+                                   placeholder="キーワード検索"
+                                   name="title"
+                                   onChange={handleChange}
+                            />
                         </div>
                         <div className="input-group">
                             <div className="select-box" data-placeholder="プロジェクト選択">
@@ -64,7 +68,7 @@ export default () => {
                                     value={container.searchQuery.user_id}
                                     onChange={handleChange}
                                 >
-                                    <option value="">担当者</option>
+                                    <option value="">担当者選択</option>
                                     {
                                         container.users.map((item) => {
                                             return (

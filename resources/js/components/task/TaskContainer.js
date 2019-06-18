@@ -49,6 +49,7 @@ export default () => {
         }
     ]);
 
+    // 削除処理
     const handleDelete = async e => {
         e.preventDefault();
 
@@ -78,6 +79,7 @@ export default () => {
             });
     };
 
+    // 保存処理
     const handleSubmit = async e => {
         e.preventDefault();
 
@@ -154,31 +156,45 @@ export default () => {
         setIsInputModal(true);
     };
 
+    // 新規作成モーダル
     const handleAddModal = () => {
         setTask(initialTaskState);
         setIsInputModal(true);
     };
 
     // 絞り込み検索
-    const filterTask = () => {
-        let tmpTasks = tasks;
+    const filterdTask = () => {
 
-        if (searchQuery.project_id) {
-            tmpTasks = tmpTasks.filter(item => item.project_id === parseInt(searchQuery.project_id));
-        }
+        let data = tasks;
+        const filterTitle = searchQuery.title && searchQuery.title.toLowerCase();
 
-        if (searchQuery.user_id) {
-            tmpTasks = tmpTasks.filter(item => {
-                if (item.user) {
-                    return item.user.id === parseInt(searchQuery.user_id);
-                } else {
+        return data.filter(row => {
+
+            // プロジェクト絞り込み
+            if (searchQuery.project_id) {
+                if (row.project_id !== parseInt(searchQuery.project_id)) {
                     return false;
                 }
-            });
-        }
+            }
 
-        return tmpTasks;
-        // return tasks;
+            // ユーザー絞り込み
+            if (searchQuery.user_id) {
+                if (row.user) {
+                    if (row.user.id !== parseInt(searchQuery.user_id)) {
+                        return false;
+                    }
+                }
+            }
+
+            // タイトル絞り込み
+            if (filterTitle) {
+                if (String(row.title).toLowerCase().indexOf(filterTitle) === -1) {
+                    return false;
+                }
+            }
+
+            return row;
+        });
     };
 
     return {
@@ -195,7 +211,7 @@ export default () => {
         handleDelete,   // 削除処理
         // モーダル表示
         handleDeleteModal, handleEditModal, handleAddModal,
-        filterTask
+        filterdTask
     };
 }
 

@@ -75,7 +75,7 @@ export default () => {
         fetchData();
     };
 
-    const list = container.filterTask().map((task) => {
+    const list = container.filterdTask().map((task) => {
         return <tr key={task.id}>
             <td className="cell-do">
                 {task.user ? <i className="remixicon-play-fill"></i> : ''}
