@@ -29,7 +29,6 @@ export default () => {
 
     // Task一覧を取得
     const fetchData = async () => {
-
         await axios
             .get('/api/users')
             .then(response => {
@@ -68,6 +67,8 @@ export default () => {
     };
 
     useEffect(() => {
+        // 読み込み時は完了以外表示
+        container.setSearchQuery({ status_id: '0' });
         fetchData();
     }, []);
 
@@ -75,7 +76,7 @@ export default () => {
         fetchData();
     };
 
-    const list = container.filterdTask().map((task) => {
+    const list = container.filteredTask().map((task) => {
         return <tr key={task.id}>
             <td className="cell-do">
                 {task.user ? <i className="remixicon-play-fill"></i> : ''}

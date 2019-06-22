@@ -18,16 +18,34 @@ export default () => {
                 <form className="form">
                     <div className="input-group mb10">
                         <div className="status-select checkbox-btn-group">
-                            <input type="radio" name="status-select" id="status-5" />
-                            <label htmlFor="status-5">完了以外</label>
-                            <input type="radio" name="status-select" id="status-1" />
-                            <label htmlFor="status-1">未着手</label>
-                            <input type="radio" name="status-select" id="status-2" />
-                            <label htmlFor="status-2">待機</label>
-                            <input type="radio" name="status-select" id="status-3" />
-                            <label htmlFor="status-3">進行中</label>
-                            <input type="radio" name="status-select" id="status-4" />
-                            <label htmlFor="status-4">完了</label>
+                            <div className="checkbox-item">
+                                <input
+                                    type="radio"
+                                    name="status_id"
+                                    id="status-0"
+                                    value="0"
+                                    defaultChecked={true}
+                                    onChange={handleChange}
+                                />
+                                <label htmlFor="status-0">完了以外</label>
+                            </div>
+                            {
+                                container.status.map((item, index) => {
+                                    if (index < 1) return;
+                                    return (
+                                        <div className="checkbox-item" key={index}>
+                                            <input
+                                                type="radio"
+                                                name="status_id"
+                                                id={'status-' + index}
+                                                value={index}
+                                                onChange={handleChange}
+                                            />
+                                            <label htmlFor={'status-' + index}>{ item.label }</label>
+                                        </div>
+                                    );
+                                })
+                            }
                         </div>
                     </div>
 

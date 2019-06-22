@@ -17,12 +17,10 @@ class TaskController extends Controller
      */
     public function index()
     {
-
-//        $tasks = Task::with(['user' => function($q) {
-//            $q->select('id', display_name');
-//        }])->orderBy('id', 'desc')->get();
-
-        $tasks = Task::with('user')->orderBy('id', 'desc')->get();
+        $tasks = Task::with('user')
+                    ->orderBy('id', 'desc')
+//                    ->where('status_id', '!=', 4)
+                    ->get();
         return TaskResource::collection($tasks);
     }
 

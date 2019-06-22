@@ -6,7 +6,6 @@ export default () => {
     const initialTaskState = {
         title: '',
         status_id: 1,
-
         // time: 0,
         due_at: '',
         user_id: 0,
@@ -19,7 +18,9 @@ export default () => {
     const [isDeleteModal, setIsDeleteModal] = useState(false);
     const [task, setTask] = useState(initialTaskState);
     // 検索キーワード
-    const [searchQuery, setSearchQuery] = useState({});
+    const [searchQuery, setSearchQuery] = useState({
+        status_id: 0
+    });
     // 編集中のタスク
     const [editTask, setEditTask] = useState(initialTaskState);
     const [priority, setPriority] = useState([
@@ -114,7 +115,6 @@ export default () => {
                 });
 
             // Object.assign(task, newTask);
-            // console.log("腰新");
         } else {
             await axios
                 .post('/api/tasks', task)
@@ -163,12 +163,22 @@ export default () => {
     };
 
     // 絞り込み検索
-    const filterdTask = () => {
-
+    const filteredTask = () => {
         let data = tasks;
         const filterTitle = searchQuery.title && searchQuery.title.toLowerCase();
 
         return data.filter(row => {
+            // ステータス絞り込み
+            if (searchQuery.status_id) {
+                // 0は完了以外の表示
+                if (parseInt(searchQuery.status_id) === 0) {
+                    if (row.status_id === 4) {
+                        return false;
+                    }
+                } else if (row.status_id !== parseInt(searchQuery.status_id)) {
+                    return false;
+                }
+            }
 
             // プロジェクト絞り込み
             if (searchQuery.project_id) {
@@ -211,7 +221,7 @@ export default () => {
         handleDelete,   // 削除処理
         // モーダル表示
         handleDeleteModal, handleEditModal, handleAddModal,
-        filterdTask
+        filteredTask
     };
 }
 
