@@ -7,6 +7,9 @@ export default () => {
 
     const handleChange = e => {
         const { name, value } = e.target;
+
+        console.log(value);
+
         container.setTask({ ...container.task, [name]: value });
     };
 
@@ -52,6 +55,7 @@ export default () => {
                                 </div>
                             </div>
                         </div>
+                        {/* TODO: 月を変えるとイベント実行されない */}
                         <div className="input-group">
                             <label className="form-label">期日</label>
                             <input type="text" name="due_at" className="form-input data-input" readOnly

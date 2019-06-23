@@ -27,6 +27,18 @@ export default () => {
     }
      */
 
+    // 選択したカラムでソートする
+    const handleSort = column => {
+        if (container.sort.key === column) {
+            container.setSort({ ...container.sort, order: -container.sort.order });
+        } else {
+            container.setSort({
+                key: column,
+                order: 1
+            })
+        }
+    };
+
     // Task一覧を取得
     const fetchData = async () => {
         await axios
@@ -67,8 +79,6 @@ export default () => {
     };
 
     useEffect(() => {
-        // 読み込み時は完了以外表示
-        container.setSearchQuery({ status_id: '0' });
         fetchData();
     }, []);
 
@@ -130,13 +140,13 @@ export default () => {
                     <thead>
                     <tr>
                         <th className="cell-do"></th>
-                        <th className="cell-id">ID</th>
-                        <th className="cell-status">状態</th>
-                        <th className="cell-priority">優先度</th>
+                        <th className="cell-id" onClick={() => handleSort('id')}>ID</th>
+                        <th className="cell-status" onClick={() => handleSort('status_id')}>状態</th>
+                        <th className="cell-priority" onClick={() => handleSort('priority_id')}>優先度</th>
                         <th className="cell-title">件名</th>
-                        <th className="cell-project">プロジェクト</th>
-                        <th>期日</th>
-                        <th>登録日</th>
+                        <th className="cell-project" onClick={() => handleSort('project_id')}>プロジェクト</th>
+                        <th onClick={() => handleSort('due_at')}>期日</th>
+                        <th onClick={() => handleSort('created_at')}>登録日</th>
                         <th>担当</th>
                         <th>時間</th>
                         <th>アクション</th>

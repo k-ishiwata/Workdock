@@ -17,10 +17,13 @@ export default () => {
     const [isInputModal, setIsInputModal] = useState(false);
     const [isDeleteModal, setIsDeleteModal] = useState(false);
     const [task, setTask] = useState(initialTaskState);
-    // 検索キーワード
+    // 検索パラメータ
     const [searchQuery, setSearchQuery] = useState({
-        status_id: 0
+        // 読み込み時はステータス完了は非表示
+        status_id: '0'
     });
+    // ソート条件(key, order)
+    const [sort, setSort] = useState({});
     // 編集中のタスク
     const [editTask, setEditTask] = useState(initialTaskState);
     const [priority, setPriority] = useState([
@@ -167,7 +170,8 @@ export default () => {
         let data = tasks;
         const filterTitle = searchQuery.title && searchQuery.title.toLowerCase();
 
-        return data.filter(row => {
+        // 絞り込み検索
+        data = data.filter(row => {
             // ステータス絞り込み
             if (searchQuery.status_id) {
                 // 0は完了以外の表示
@@ -202,9 +206,19 @@ export default () => {
                     return false;
                 }
             }
-
             return row;
         });
+
+        // ソート
+        if (sort.key) {
+            data = data.slice().sort((a, b) => {
+                a = a[sort.key];
+                b = b[sort.key];
+                return (a === b ? 0 : a > b ? 1 : -1) * sort.order;
+            });
+        }
+
+        return data;
     };
 
     return {
@@ -217,6 +231,7 @@ export default () => {
         isDeleteModal, setIsDeleteModal,
         alert, setAlert,
         priority, status,
+        sort, setSort,
         handleSubmit,   // 保存処理
         handleDelete,   // 削除処理
         // モーダル表示
