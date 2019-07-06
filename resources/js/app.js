@@ -12,46 +12,24 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-require('./components/task/Task');
 
+require('./task/Task');
 
-// 削除モーダル
 window.addEventListener('load', () => {
-    (() => {
-        const deleteModal = document.getElementById('delete-modal');
-
-        if (!deleteModal) return;
-
-        const daleteBtns = document.querySelectorAll('.delete-btn');
-        const submiteBaseUrl = document.getElementById('delete-form').action;
-
-        daleteBtns.forEach((btn) => {
-            btn.addEventListener('click', (e) => {
-                const selectId = e.target.getAttribute('data-id');
-                deleteModal.classList.add('is-open');
-                deleteModal.querySelector('#delete-form').action = submiteBaseUrl + '/' + selectId;
-            });
-        });
-
-        deleteModal.querySelector('.close-btn').addEventListener('click', (e) => {
-            deleteModal.classList.remove('is-open');
-        });
-    })();
-
-    // ナビゲーションのアクティブ
-
-
-
+    require('./commons/notice');
+    require('./commons/deleteModal');
 });
 
 // 日付入力
 import flatpickr from "flatpickr";
 import { Japanese } from "flatpickr/dist/l10n/ja";
 import 'flatpickr/dist/themes/light.css';
-
+//
 flatpickr('.data-input', {
     locale: Japanese,
     enableTime: true,
-    dateFormat: "Y-m-d H:i:S"
-    // defaultDate: "2019-06-01"
+    dateFormat: "Y-m-d H:i",
+    // altFormat: "Y-m-d H:i",
+    allowInput: true
+    // dateFormat: "Y-m-d H:i:S"
 });

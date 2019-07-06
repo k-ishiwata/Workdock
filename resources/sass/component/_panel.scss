@@ -27,6 +27,10 @@ $panel-padding: 25px;
         &.is-full {
             margin: -$panel-padding -$panel-padding 0;
         }
+
+        p {
+            line-height: 1.4;
+        }
     }
 
     .panel-footer {

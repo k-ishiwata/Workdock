@@ -51,8 +51,13 @@
 
 @yield('content')
 
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script src="https://npmcdn.com/flatpickr@4.5.7/dist/l10n/ja.js"></script>
+<div id="notice">
+    <p id="notice-message">データを更新しました。</p>
+    <button id="notice-close-btn">
+        <span>&times;</span>
+    </button>
+</div>
+
 <script src="{{ asset('js/app.js')}}"></script>
 </body>
 </html>
