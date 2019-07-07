@@ -136,6 +136,24 @@ export default () => {
             ) {
                 return;
             }
+
+            // 期限で絞り込み
+            if (filterQuery.due_at && filterQuery.due_at[0] !== '') {
+                const thisDueDate = dayjs(row.due_at).format('YYYY-MM-DD');
+
+                // 一つの日だけ選択されている場合
+                if ( filterQuery.due_at.length === 1 &&
+                     filterQuery.due_at[0] !== thisDueDate ) {
+                    return;
+                }
+                // 範囲選択の場合はその範囲に含まれていないか
+                else if (filterQuery.due_at.length === 2 &&
+                    !(filterQuery.due_at[0] <= thisDueDate &&
+                    filterQuery.due_at[1] >= thisDueDate )) {
+                    return;
+                }
+            }
+
             return row;
         });
 

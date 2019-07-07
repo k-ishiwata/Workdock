@@ -16,6 +16,23 @@ export default () => {
         });
     };
 
+    const handleDateChange = e => {
+        let { value } = e.target;
+
+        value = value.split(' ');
+
+        // 範囲選択している場合
+        if (value.length > 2) {
+            // 「から」文字の削除
+            value.splice(1, 1);
+        }
+
+        dispatch({
+            type: 'setFilterQuery',
+            payload: { ...filterQuery, due_at: value }
+        });
+    };
+
     return (
         <div className="search-panel toggle-block is-open">
             <h3 className="title toggle-btn">
@@ -109,7 +126,12 @@ export default () => {
                             </div>
                         </div>
                         <div className="input-group">
-                            <input type="text" placeholder="期日" id="date-start-input" />
+                            <input
+                                type="text"
+                                placeholder="期日"
+                                name="due_at"
+                                className="data-range-input"
+                                onBlur={handleDateChange} />
                         </div>
                     </div>
                 </form>
