@@ -6,7 +6,7 @@ import axios from "axios";
 export default () => {
     const context = useContext(Context);
     const [
-        { isInputModal, task, priority, projects, status },
+        { isInputModal, task, priority, projects, status, users },
         dispatch
     ] = context.taskReducer;
 
@@ -71,11 +71,6 @@ export default () => {
         }
     };
 
-    useEffect(() => {
-        // dueDateRef.current.value = task.due_at;
-
-    }, [isInputModal]);
-
     return (
         <div className={`overlay ${isInputModal && "is-open"}`}>
             <div className="modal panel">
@@ -121,17 +116,6 @@ export default () => {
 
                         <div className="input-group">
                             <label className="form-label">期日</label>
-                            {/*<Flatpickr*/}
-                            {/*    data-enable-time*/}
-                            {/*    className='form-input'*/}
-                            {/*    value={task.due_at || ''}*/}
-                            {/*    // onChange={handleDateChange}*/}
-                            {/*    // onChange={data => {*/}
-                            {/*    //     console.log(dispatch);*/}
-                            {/*    //     // handleDateChange(instance, 'due_at');*/}
-                            {/*    // }}*/}
-                            {/*/>*/}
-
                             <input type="text" name="due_at" className="form-input data-input"
                                    value={
                                        task.due_at ?
@@ -141,30 +125,30 @@ export default () => {
                                    onChange={handleChange}
                             />
                         </div>
-                        {/*<div className="input-group">*/}
-                        {/*    <label className="form-label">担当</label>*/}
-                        {/*    <div className="form-input">*/}
-                        {/*       <div className="select-box">*/}
-                        {/*            <select name="user_id"*/}
-                        {/*                    defaultValue={task.user_id || ''}*/}
-                        {/*                    onChange={handleChange}*/}
-                        {/*            >*/}
-                        {/*                <option>担当者</option>*/}
-                        {/*                {*/}
-                        {/*                    users.map((item) => {*/}
-                        {/*                        return (*/}
-                        {/*                            <option*/}
-                        {/*                                key={item.id}*/}
-                        {/*                                value={item.id}>*/}
-                        {/*                                {item.display_name}*/}
-                        {/*                            </option>*/}
-                        {/*                        );*/}
-                        {/*                    })*/}
-                        {/*                }*/}
-                        {/*            </select>*/}
-                        {/*       </div>*/}
-                        {/*    </div>*/}
-                        {/*</div>*/}
+                        <div className="input-group">
+                            <label className="form-label">担当</label>
+                            <div className="form-input">
+                               <div className="select-box">
+                                    <select name="user_id"
+                                            value={task.user_id || ''}
+                                            onChange={handleChange}
+                                    >
+                                        <option>担当者</option>
+                                        {
+                                            users.map((item) => {
+                                                return (
+                                                    <option
+                                                        key={item.id}
+                                                        value={item.id}>
+                                                        {item.display_name}
+                                                    </option>
+                                                );
+                                            })
+                                        }
+                                    </select>
+                               </div>
+                            </div>
+                        </div>
                         <div className="input-group">
                             <label className="form-label">優先度</label>
                             <div className="form-input">

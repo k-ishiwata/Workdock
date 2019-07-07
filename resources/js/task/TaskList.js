@@ -17,11 +17,15 @@ export default () => {
         dispatch
     ] = context.taskReducer;
 
+    const [isLoading, setIsLoading] = useState(false);
     // ソート
     const [sort, setSort] = useState({});
 
     // Task一覧を取得
     const fetchData = async () => {
+
+        setIsLoading(true);
+
         await axios
             .get('/api/users')
             .then(response => {
@@ -54,6 +58,8 @@ export default () => {
             }).catch(error => {
                 window.notice('データの取得に失敗しました。', 'error');
             });
+
+        setIsLoading(false);
     };
 
 
@@ -172,82 +178,85 @@ export default () => {
                 <i className="remixicon-add-circle-line"></i>新規登録
             </button>
         </div>
-        <div className="task-list table-sticky">
-            <table className="table is-stripe">
-                <thead>
-                <tr>
-                    <th className="cell-do"></th>
-                    <th className="cell-id" onClick={() => handleSort('id')}>ID</th>
-                    <th className="cell-status" onClick={() => handleSort('status_id')}>状態</th>
-                    <th className="cell-priority" onClick={() => handleSort('priority_id')}>優先度</th>
-                    <th className="cell-title">件名</th>
-                    <th className="cell-project" onClick={() => handleSort('project_id')}>プロジェクト</th>
-                    <th onClick={() => handleSort('due_at')}>期日</th>
-                    <th onClick={() => handleSort('created_at')}>登録日</th>
-                    <th onClick={() => handleSort('user_id')}>担当</th>
-                    <th>時間</th>
-                    <th>アクション</th>
-                </tr>
-                </thead>
-                <tbody>
-                {
-                    filteredTask.map(task => {
-                        return(
-                            <tr key={ task.id }>
-                                <td className="cell-do">
-                                    {task.user ? <i className="remixicon-play-fill"></i> : ''}
-                                </td>
-                                <td>{( '0000' + task.id ).slice( -4 )}</td>
-                                <td className="cell-status">
+        { isLoading ?
+            <div className="loader" /> :
+            <div className="task-list table-sticky">
+                <table className="table is-stripe">
+                    <thead>
+                    <tr>
+                        <th className="cell-do"></th>
+                        <th className="cell-id" onClick={() => handleSort('id')}>ID</th>
+                        <th className="cell-status" onClick={() => handleSort('status_id')}>状態</th>
+                        <th className="cell-priority" onClick={() => handleSort('priority_id')}>優先度</th>
+                        <th className="cell-title">件名</th>
+                        <th className="cell-project" onClick={() => handleSort('project_id')}>プロジェクト</th>
+                        <th onClick={() => handleSort('due_at')}>期日</th>
+                        <th onClick={() => handleSort('created_at')}>登録日</th>
+                        <th onClick={() => handleSort('user_id')}>担当</th>
+                        <th>時間</th>
+                        <th>アクション</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {
+                        filteredTask.map(task => {
+                            return(
+                                <tr key={ task.id }>
+                                    <td className="cell-do">
+                                        {task.user ? <i className="remixicon-play-fill"></i> : ''}
+                                    </td>
+                                    <td>{( '0000' + task.id ).slice( -4 )}</td>
+                                    <td className="cell-status">
                                     <span className={'label is-' + status[task.status_id].color}>
                                         {status[task.status_id].label}
                                     </span>
-                                </td>
-                                <td className={'cell-priority ' + (task.priority_id == 1 ? 'is-high' : null)}>
-                                    {priority[task.priority_id]}
-                                </td>
-                                <td className="cell-title">{task.title}</td>
-                                <td><a href={'/project/' + task.project_id}>
-                                {
-                                    task.project_id ?
-                                        projects.find(x => x.id === task.project_id).title : ''
-                                }
-                                </a></td>
-                                <td>{task.due_at ? dayjs(task.due_at).format('YY/MM/DD') : ''}</td>
-                                <td>{dayjs(task.created_at).format('YY/MM/DD')}</td>
-                                <td>{task.user ? task.user.display_name : '未設定'}</td>
-                                <td>{timeFormat(task.time)}</td>
-                                <td className="cell-action">
-                                    <a title="編集" onClick={() => {
-                                        dispatch({
-                                            type: 'inputModal',
-                                            payload: {
-                                                task: task,
-                                                isInputModal: true
-                                            }
-                                        })
-                                    }}>
-                                        <i className="remixicon-file-edit-line"></i>
-                                    </a>
-                                    <a title="削除" onClick={() => {
-                                        dispatch({
-                                            type: 'deleteModal',
-                                            payload: {
-                                                task: task,
-                                                isDeleteModal: true
-                                            }
-                                        })
-                                    }}>
-                                        <i className="remixicon-close-line"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        );
-                    })
-                }
-                </tbody>
-            </table>
-        </div>
+                                    </td>
+                                    <td className={'cell-priority ' + (task.priority_id == 1 ? 'is-high' : null)}>
+                                        {priority[task.priority_id]}
+                                    </td>
+                                    <td className="cell-title">{task.title}</td>
+                                    <td><a href={'/project/' + task.project_id}>
+                                        {
+                                            task.project_id ?
+                                                projects.find(x => x.id === task.project_id).title : ''
+                                        }
+                                    </a></td>
+                                    <td>{task.due_at ? dayjs(task.due_at).format('YY/MM/DD') : ''}</td>
+                                    <td>{dayjs(task.created_at).format('YY/MM/DD')}</td>
+                                    <td>{task.user ? task.user.display_name : '未設定'}</td>
+                                    <td>{timeFormat(task.time)}</td>
+                                    <td className="cell-action">
+                                        <a title="編集" onClick={() => {
+                                            dispatch({
+                                                type: 'inputModal',
+                                                payload: {
+                                                    task: task,
+                                                    isInputModal: true
+                                                }
+                                            })
+                                        }}>
+                                            <i className="remixicon-file-edit-line"></i>
+                                        </a>
+                                        <a title="削除" onClick={() => {
+                                            dispatch({
+                                                type: 'deleteModal',
+                                                payload: {
+                                                    task: task,
+                                                    isDeleteModal: true
+                                                }
+                                            })
+                                        }}>
+                                            <i className="remixicon-close-line"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            );
+                        })
+                    }
+                    </tbody>
+                </table>
+            </div>
+        }
         </>
     );
 };
