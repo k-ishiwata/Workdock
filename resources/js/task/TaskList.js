@@ -62,7 +62,6 @@ export default () => {
         setIsLoading(false);
     };
 
-
     useEffect(() => {
         fetchData();
     }, []);
@@ -175,6 +174,20 @@ export default () => {
         return tmpTasks;
     }, [filterQuery, sort, tasks]);
 
+    const handleTimer = async task => {
+        await axios
+            .put('/api/tasks/timer/' + task.id, task)
+            .then(response => {
+                dispatch({
+                    type: 'updateTask',
+                    payload: response.data.data
+                });
+            })
+            .catch(error => {
+                window.notice('タイマーの開始に失敗しました。', 'error');
+            });
+    };
+
     return (
         <>
         <div className="task-head">
@@ -219,9 +232,13 @@ export default () => {
                     {
                         filteredTask.map(task => {
                             return(
-                                <tr key={ task.id }>
+                                <tr key={ task.id } className={task.start_at && 'run'}>
                                     <td className="cell-do">
-                                        {task.user ? <i className="remixicon-play-fill"></i> : ''}
+                                        {task.user &&
+                                            <i className={
+                                                task.start_at ? 'remixicon-pause-fill' : 'remixicon-play-fill'
+                                            } onClick={() => handleTimer(task)}></i>
+                                        }
                                     </td>
                                     <td>{( '0000' + task.id ).slice( -4 )}</td>
                                     <td className="cell-status">
@@ -229,17 +246,17 @@ export default () => {
                                         {status[task.status_id].label}
                                     </span>
                                     </td>
-                                    <td className={'cell-priority ' + (task.priority_id == 1 ? 'is-high' : null)}>
+                                    <td className={'cell-priority ' + (task.priority_id == 1 && 'is-high')}>
                                         {priority[task.priority_id]}
                                     </td>
                                     <td className="cell-title">{task.title}</td>
                                     <td><a href={'/project/' + task.project_id}>
-                                        {
-                                            task.project_id ?
-                                                projects.find(x => x.id === task.project_id).title : ''
-                                        }
+                                    {
+                                        task.project_id &&
+                                            projects.find(x => x.id === task.project_id).title
+                                    }
                                     </a></td>
-                                    <td>{task.due_at ? dayjs(task.due_at).format('YY/MM/DD') : ''}</td>
+                                    <td>{task.due_at && dayjs(task.due_at).format('YY/MM/DD')}</td>
                                     <td>{dayjs(task.created_at).format('YY/MM/DD')}</td>
                                     <td>{task.user ? task.user.display_name : '未設定'}</td>
                                     <td>{timeFormat(task.time)}</td>

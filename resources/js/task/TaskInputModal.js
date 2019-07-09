@@ -41,7 +41,6 @@ export default () => {
         // DateInput は個別に取得
         tmpTask.due_at = dueDateRef.current.value;
 
-
         // idがあれば更新、なければ作成
         if (tmpTask.id) {
             await axios
@@ -54,7 +53,10 @@ export default () => {
                     window.notice('データを更新しました。');
                 })
                 .catch(error => {
-                    window.notice('データの更新に失敗しました。', 'error');
+                    const errorMessage = error.response ?
+                        error.response.data.errors[0] : 'データの更新に失敗しました。';
+
+                    window.notice(errorMessage, 'error');
                 });
         } else {
             await axios
@@ -66,7 +68,10 @@ export default () => {
                     });
                     window.notice('データを登録しました。');
                 }).catch(error => {
-                    window.notice('データの登録に失敗しました。', 'error');
+                    const errorMessage = error.response ?
+                        error.response.data.errors[0] : 'データの更新に失敗しました。';
+
+                    window.notice(errorMessage, 'error');
                 });
         }
     };
@@ -118,8 +123,8 @@ export default () => {
                             <label className="form-label">期日</label>
                             <input type="text" name="due_at" className="form-input data-input"
                                    value={
-                                       task.due_at ?
-                                           dayjs(task.due_at).format('YYYY-MM-DD HH:mm') : ''
+                                       task.due_at &&
+                                       dayjs(task.due_at).format('YYYY-MM-DD HH:mm')
                                    }
                                    ref={dueDateRef}
                                    onChange={handleChange}

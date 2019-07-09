@@ -23,3 +23,4 @@ Route::apiResources([
 ]);
 
 Route::get('projects', 'Api\ProjectController@index')->name('project.index');
+Route::put('tasks/timer/{task}', 'Api\TaskController@toggleTimer')->name('task.start');

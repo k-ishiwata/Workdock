@@ -68,4 +68,31 @@ class TaskController extends Controller
             return response()->json(null, 409);
         }
     }
+
+    /**
+     * start_atに現在の時間を記録
+     * @param Task $task
+     */
+    public function toggleTimer(Task $task)
+    {
+        // タイマーが実行中の場合は停止して時間を加算
+        if ($task->start_at) {
+
+            // 開始と停止時間の差分を取得（分）
+            $time = $task->start_at->diffInMinutes(Carbon::now());
+            clock($time);
+
+            $task->time += $time;
+            $task->start_at = null;
+
+        }
+        // タイマーが実行されていない場合は実行
+        else {
+            $task->start_at = Carbon::now();
+        }
+
+        $task->save();
+
+        return TaskResource::make($task);
+    }
 }
