@@ -115,6 +115,10 @@ form *:focus {
 
     .input-group {
         margin-bottom: 20px;
+
+        .input-help {
+            margin-top: 5px;
+        }
     }
 
     // ラベル＋入力横並び

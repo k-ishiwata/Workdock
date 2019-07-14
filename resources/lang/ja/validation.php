@@ -138,6 +138,9 @@ return [
     |
     */
     'attributes' => [
-        'title' => 'タイトル'
+        'title' => 'タイトル',
+        'name' => 'ログインID',
+        'display_name' => 'ユーザー名',
+        'password' => 'パスワード'
     ],
 ];

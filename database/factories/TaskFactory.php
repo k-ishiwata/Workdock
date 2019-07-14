@@ -15,7 +15,7 @@ $factory->define(Task::class, function (Faker $faker) {
 //        'price' => $faker->numberBetween($min = 600, $max = 4000),
 //        'due_at' => $faker->dateTime($max = 'now', $timezone = date_default_timezone_get()),
         // ランダムでnull
-        'due_at' => $faker->boolean(20) ? $faker->dateTimeBetween($startDate = 'now', $endDate = '+ 20 days') : null,
+        'due_at' => $faker->boolean(20) ? $faker->dateTimeBetween($startDate = 'now', $endDate = '+ 20 days')->format('Y-m-d H:i') : null,
     ];
 });
 

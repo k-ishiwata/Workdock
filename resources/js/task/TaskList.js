@@ -232,7 +232,7 @@ export default () => {
                     {
                         filteredTask.map(task => {
                             return(
-                                <tr key={ task.id } className={task.start_at && 'run'}>
+                                <tr key={ task.id } className={task.start_at && 'doing'}>
                                     <td className="cell-do">
                                         {task.user &&
                                             <i className={

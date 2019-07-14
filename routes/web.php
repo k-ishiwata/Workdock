@@ -19,7 +19,10 @@ Route::get('tasks', function () {
     return view('task');
 });
 
-Route::resource('projects', 'ProjectController');
+Route::resources([
+    'projects' => 'ProjectController',
+    'users' => 'UserController'
+]);
 
 Auth::routes();
 

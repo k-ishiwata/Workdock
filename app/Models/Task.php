@@ -16,7 +16,7 @@ class Task extends Model
         'status_id' => 'integer',
         'priority_id' => 'integer',
 //        'due_at' => 'datetime:Y-m-d H:i:s',
-//        'start_at' => 'datetime:Y-m-d H:i'
+//        'start_at' => 'datetime:Y-m-d H:i:s',
         'due_at' => 'datetime',
         'start_at' => 'datetime'
     ];

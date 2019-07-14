@@ -1,5 +1,6 @@
 .alert {
     position: relative;
+    line-height: 1.4;
     padding: .75rem 1.25rem;
     margin-bottom: 1rem;
     border-radius: .25rem;
@@ -16,6 +17,14 @@
         color: #856404;
         border-color: #e6dab7;
         background-color: #ffeeba;
+    }
+
+    ul {
+        margin-left: 1em;
+
+        li + li {
+            margin-top: .2rem;
+        }
     }
 
     .close {

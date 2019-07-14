@@ -17,7 +17,7 @@
             <li><a href="/">ダッシュボード</a></li>
             <li class="is-active"><a href="/tasks">タスク</a></li>
             <li><a href="/projects">プロジェクト</a></li>
-            <li><a href="#">メンバー</a></li>
+            <li><a href="/users">ユーザー</a></li>
         </ul>
     </nav>
 
