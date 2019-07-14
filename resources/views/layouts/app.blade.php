@@ -15,7 +15,7 @@
     <nav class="header-nav">
         <ul>
             <li><a href="/">ダッシュボード</a></li>
-            <li class="is-active"><a href="/tasks">タスク</a></li>
+            <li><a href="/tasks">タスク</a></li>
             <li><a href="/projects">プロジェクト</a></li>
             <li><a href="/users">ユーザー</a></li>
         </ul>
