@@ -124,7 +124,8 @@ export default () => {
                             <input type="text" name="due_at" className="form-input data-input"
                                    value={
                                        task.due_at &&
-                                       dayjs(task.due_at).format('YYYY-MM-DD HH:mm')
+                                       dayjs(task.due_at).format('YYYY-MM-DD HH:mm') ||
+                                       ''
                                    }
                                    ref={dueDateRef}
                                    onChange={handleChange}

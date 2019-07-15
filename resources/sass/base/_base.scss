@@ -139,8 +139,8 @@ small,
     .w#{$i*10} {
         width: #{$i*10%} !important;
     }
-    .w#{$i*10}px {
-        width: #{$i*10px} !important;
+    .w#{$i*100}px {
+        width: #{$i*100px} !important;
     }
     .mb#{$i*10} {
         margin-bottom: #{$i*10px} !important;

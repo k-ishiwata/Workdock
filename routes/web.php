@@ -15,15 +15,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('tasks', function () {
-    return view('task');
+Route::group(['middleware' => 'auth'], function()
+{
+    Route::get('tasks', function () {
+        return view('task');
+    });
+
+    Route::resources([
+        'projects' => 'ProjectController',
+        'users' => 'UserController'
+    ]);
 });
 
-Route::resources([
-    'projects' => 'ProjectController',
-    'users' => 'UserController'
-]);
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');

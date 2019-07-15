@@ -17,6 +17,7 @@ require('./task/Task');
 
 window.addEventListener('load', () => {
     require('./commons/navigation-active');
+    require('./commons/dropdown');
     require('./commons/notice');
     require('./commons/deleteModal');
 });

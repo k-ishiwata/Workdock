@@ -14,22 +14,6 @@
         margin-right: 25px;
     }
 
-    .head-nav {
-        margin-left: auto;
-        list-style: none;
-        display: flex;
-
-        > li {
-            margin-left: 6px;
-        }
-
-        .btn {
-            font-size: .85rem;
-            min-width: 130px;
-            padding: 10px 23px;
-        }
-    }
-
     .header-right {
         margin-left: auto;
     }
@@ -49,12 +33,19 @@
             display: flex;
             align-items: center;
             cursor: pointer;
+            padding: 10px;
+        }
+
+        &.is-open {
+            .user-panel-menu {
+                display: block;
+            }
         }
 
         .user-panel-menu {
             position: absolute;
             right: 0;
-            top: 60px;
+            top: 34px;
             display: none;
 
             ul {
@@ -65,16 +56,16 @@
                 box-shadow: 2px 2px 15px rgba(0, 0, 0, .15);
                 border-radius: 5px;
 
-                &:before {
-                    content: "";
-                    position: absolute;
-                    border-right: 8px solid transparent;
-                    border-bottom: 12px solid #fff;
-                    border-left: 8px solid transparent;
-                    top: -12px;
-                    left: 50%;
-                    margin-left: -6px;
-                }
+                //&:before {
+                //    content: "";
+                //    position: absolute;
+                //    border-right: 8px solid transparent;
+                //    border-bottom: 12px solid #fff;
+                //    border-left: 8px solid transparent;
+                //    top: -12px;
+                //    left: 50%;
+                //    margin-left: -6px;
+                //}
             }
 
             a {
@@ -122,7 +113,7 @@
             a {
                 text-decoration: none;
                 color: $color-text;
-                padding: 0 10px;
+                padding: 10px;
 
                 &:hover {
                     color: $color-key;

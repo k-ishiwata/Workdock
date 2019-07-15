@@ -38,7 +38,7 @@ export default () => {
                         </p>
                     </div>
                     <div className="panel-footer">
-                        <button className="btn is-red">削除</button>
+                        <button className="btn is-pink">削除</button>
                         <a
                             className="btn close-btn"
                             onClick={() => {

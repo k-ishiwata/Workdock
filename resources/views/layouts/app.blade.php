@@ -30,23 +30,25 @@
         </form>
     </div> -->
     <div class="header-right">
-        <div class="user-panel">
-            <div class="user-panel-toggle">
+        <div class="user-panel dropdown">
+            <div class="user-panel-toggle dropdown-toggle">
 {{--                <div class="image"><img src="assets/img/face.jpg" alt=""></div>--}}
-                <p>山田太郎</p>
+                <span>{{ Auth::user()->display_name }}</span>
             </div>
-            <div class="user-panel-menu">
+            <div class="user-panel-menu dropdown-menu">
                 <ul>
-                    <li><a href="#">ユーザー設定</a></li>
-                    <li><a href="#">ログアウト</a></li>
+                    <li><a href="#">ユーザー情報</a></li>
+                    <li><a class="dropdown-item" href="{{ route('logout') }}"
+                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        ログアウト
+                    </a></li>
                 </ul>
             </div>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                @csrf
+            </form>
         </div>
     </div>
-    <!-- <ul class="head-nav">
-        <li><a href="create.html" class="btn">新規作成</a></li>
-        <li><a href="#" class="btn is-outline">ログアウト</a></li>
-    </ul> -->
 </header>
 
 @yield('content')

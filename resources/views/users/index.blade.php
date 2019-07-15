@@ -94,7 +94,7 @@
                     </p>
                 </div>
                 <div class="panel-footer">
-                    <button class="btn is-red">削除</button>
+                    <button class="btn is-pink">削除</button>
                     <a class="btn close-btn">キャンセル</a>
                 </div>
             </form>
