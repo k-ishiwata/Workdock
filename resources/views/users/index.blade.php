@@ -4,21 +4,7 @@
         <div id="project">
             <div class="l-row is-gutters-md">
                 <div class="l-col is-40">
-                    @if (Session::has('alert'))
-                        <div class="alert">{{ Session::get('alert') }}</div>
-                    @endif
-
-                    {{-- エラーの表示 --}}
-                    @if ($errors->any())
-                        <div class="alert is-error">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-
+                    @include('components/alert')
                     <div class="panel">
                         <h3 class="panel-title">新規登録</h3>
                         <form class="form is-horizontal" method="POST" action="{{ route('users.store') }}">
@@ -75,30 +61,11 @@
                             </tr>
                         @endforeach
                     </table>
-
                     {!! $users->render() !!}
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="delete-modal" class="overlay">
-        <div class="modal panel">
-            <h3 class="panel-title">削除確認</h3>
-            <form method="POST" class="form" id="delete-form" action="/users">
-                @method('DELETE')
-                @csrf
-                <div class="panel-body">
-                    <p class="input-group align-center">
-                        本当に削除しますか？
-                    </p>
-                </div>
-                <div class="panel-footer">
-                    <button class="btn is-pink">削除</button>
-                    <a class="btn close-btn">キャンセル</a>
-                </div>
-            </form>
-        </div>
-    </div>
-
+    @include('components/delete-modal', ['url' => '/users'])
 @endsection

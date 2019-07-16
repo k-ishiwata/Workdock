@@ -4,14 +4,12 @@
         <div id="project">
             <div class="l-row is-gutters-md">
                 <div class="l-col is-40">
-                    @if (Session::has('alert'))
-                        <div class="alert alert-success">{{ Session::get('alert') }}</div>
-                    @endif
                     <div class="panel">
                         <h3 class="panel-title">新規登録</h3>
                         <form class="form is-horizontal" method="POST" action="{{ route('projects.store') }}">
                             @csrf
                             <div class="panel-body">
+                                @include('components/alert')
                                 <div class="input-group">
                                     <label class="form-label">プロジェクト名</label>
                                     <input type="text" name="title" value="{{ old('title') }}" class="form-input">
@@ -55,23 +53,6 @@
         </div>
     </div>
 
-    <div id="delete-modal" class="overlay">
-        <div class="modal panel">
-            <h3 class="panel-title">削除確認</h3>
-            <form method="POST" class="form" id="delete-form" action="/projects">
-                @method('DELETE')
-                @csrf
-                <div class="panel-body">
-                    <p class="input-group align-center">
-                        本当に削除しますか？
-                    </p>
-                </div>
-                <div class="panel-footer">
-                    <button class="btn is-pink">削除</button>
-                    <a class="btn close-btn">キャンセル</a>
-                </div>
-            </form>
-        </div>
-    </div>
+    @include('components/delete-modal', ['url' => '/projects'])
 
 @endsection

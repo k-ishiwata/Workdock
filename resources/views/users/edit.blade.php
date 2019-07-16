@@ -8,18 +8,7 @@
                     @method('PUT')
                     @csrf
                     <div class="panel-body">
-                        @if (Session::has('alert'))
-                            <div class="alert">{{ Session::get('alert') }}</div>
-                        @elseif ($errors->any())
-                            <div class="alert is-error">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-
+                        @include('components/alert')
                         <div class="input-group">
                             <label class="form-label">ログインID</label>
                             <input type="text" name="name" value="{{ $user->name }}" class="form-input">
