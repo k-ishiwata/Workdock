@@ -14,9 +14,9 @@ class CreateProjectsTable extends Migration
     public function up()
     {
         Schema::create('projects', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('title');
-            $table->integer('time')->unsigned()->default(0)->comment("計測時間");
+            $table->unsignedInteger('time')->unsigned()->default(0)->comment("計測時間");
             $table->timestamps();
         });
     }

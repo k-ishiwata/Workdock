@@ -14,16 +14,16 @@ class CreateTasksTable extends Migration
     public function up()
     {
         Schema::create('tasks', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('title')->nullable(false);
-            $table->integer('project_id')->references('id')->on('projects')->unsigned()->index()->nullable();
-            $table->integer('status_id')->unsigned()->default(1)->comment("状態");
-            $table->integer('priority_id')->unsigned()->nullable()->comment("優先度");
+            $table->unsignedInteger('project_id')->references('id')->on('projects')->unsigned()->index()->nullable();
+            $table->unsignedTinyInteger('status_id')->unsigned()->default(1)->comment("状態");
+            $table->unsignedTinyInteger('priority_id')->unsigned()->nullable()->comment("優先度");
 //            $table->integer('note_id')->unsigned()->nullable();
             $table->timestamp('due_at')->nullable()->comment("期限");
             $table->timestamp('start_at')->nullable()->comment("実行開始時間");
-            $table->integer('time')->unsigned()->default(0)->comment("計測時間");
-            $table->integer('user_id')->references('id')->on('users')->unsigned()->index()->nullable();
+            $table->unsignedInteger('time')->unsigned()->default(0)->comment("計測時間");
+            $table->unsignedInteger('user_id')->references('id')->on('users')->unsigned()->index()->nullable();
             $table->timestamps();
         });
     }
