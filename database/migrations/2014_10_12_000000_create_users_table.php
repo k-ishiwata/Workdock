@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->unsignedInteger('run_task_id')->nullable();
+            $table->unsignedInteger('run_task_id')->nullable()->comment('実行中のタスク');
             $table->rememberToken();
             $table->timestamps();
         });

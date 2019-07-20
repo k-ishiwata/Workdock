@@ -174,6 +174,7 @@ export default () => {
         return tmpTasks;
     }, [filterQuery, sort, tasks]);
 
+    // タイマーの実行
     const handleTimer = async task => {
         await axios
             .put('/api/tasks/timer/' + task.id, task)
@@ -184,7 +185,9 @@ export default () => {
                 });
             })
             .catch(error => {
-                window.notice('タイマーの開始に失敗しました。', 'error');
+                console.log(error.response.data);
+
+                window.notice(error.response.data, 'error');
             });
     };
 
@@ -242,9 +245,9 @@ export default () => {
                                     </td>
                                     <td>{( '0000' + task.id ).slice( -4 )}</td>
                                     <td className="cell-status">
-                                    <span className={'label is-' + status[task.status_id].color}>
-                                        {status[task.status_id].label}
-                                    </span>
+                                        <span className={'label is-' + status[task.status_id].color}>
+                                            {status[task.status_id].label}
+                                        </span>
                                     </td>
                                     <td className={'cell-priority ' + (task.priority_id == 1 && 'is-high')}>
                                         {priority[task.priority_id]}
