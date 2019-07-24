@@ -8,6 +8,7 @@ use App\Http\Requests\TaskRequest;
 
 use App\Http\Resources\TaskResource;
 use Carbon\Carbon;
+use PhpParser\Node\Expr\Array_;
 
 class TaskController extends Controller
 {
@@ -68,6 +69,20 @@ class TaskController extends Controller
     }
 
     /**
+     * 複数削除
+     * @param string $taskIds
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function deletes(string $taskIds)
+    {
+        if (Task::destroy(explode(',',$taskIds))) {
+            return response()->json(null, 204);
+        } else {
+            return response()->json(null, 409);
+        }
+    }
+
+    /**
      * start_atに現在の時間を記録
      * @param Task $task
      */
@@ -103,6 +118,12 @@ class TaskController extends Controller
 
         $task->save();
         $task->user->save();
+
+        // タスクにプロジェクトが設定してある場合は加算
+//        if (isset($time) && $task->project) {
+//            $task->project->time += $time;
+//            $task->project->save();
+//        }
 
         return TaskResource::make($task);
     }

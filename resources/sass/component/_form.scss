@@ -119,7 +119,9 @@ form *:focus {
     // .submit-area
 
     .input-group {
-        margin-bottom: 20px;
+        + .input-group {
+            margin-top: 20px;
+        }
 
         .input-help {
             margin-top: 5px;
@@ -165,7 +167,7 @@ form *:focus {
         .input-group {
             width: 100%;
             margin-left: 20px;
-            margin-bottom: 0;
+            margin-top: 0;
         }
 
         .btn {
@@ -275,3 +277,71 @@ form *:focus {
         background: $color-key;
     }
 }
+
+
+.checkbox {
+    cursor: pointer;
+    position: relative;
+    padding-left: 23px;
+
+    input[type="checkbox"] {
+        appearance: none;
+    }
+
+    span {
+        display: inline-block;
+        margin-right: 15px;
+
+        &:before,
+        &:after {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            top: 1px;
+            left: 0;
+        }
+
+        &:before {
+            z-index: 0;
+            background-color: transparent;
+            width: 15px;
+            height: 15px;
+            border: 1px solid #aaa;
+            border-radius: 3px;
+        }
+
+        &:after {
+            z-index: 1;
+            margin-top: 2px;
+            margin-left: 6px;
+            width: 5px;
+            height: 9px;
+            border: 2px solid #fff;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+            display: none;
+        }
+    }
+
+    input[type="checkbox"]:checked + span {
+        &:before {
+            background-color: $color-key;
+            border-color: $color-key;
+        }
+
+        &:after {
+            display: block;
+        }
+    }
+
+    // ラベルなし
+    &.is-label-none {
+        padding-left: 0;
+        margin-left: -15px;
+
+        span {
+            position: absolute;
+            margin-right: 0;
+        }
+    }
+} // .checkbox

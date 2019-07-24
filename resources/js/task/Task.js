@@ -6,6 +6,7 @@ import TaskList from './TaskList';
 import TaskSearch from './TaskSearch';
 import TaskInputModal from './TaskInputModal';
 import TaskDeleteModal from './TaskDeleteModal';
+import TaskMultipleDeleteModal from './TaskMultipleDeleteModal';
 import TaskState from './TaskState';
 
 const Task = () => {
@@ -17,6 +18,7 @@ const Task = () => {
             <TaskList />
             <TaskInputModal />
             <TaskDeleteModal />
+            <TaskMultipleDeleteModal />
         </Context.Provider>
     );
 };

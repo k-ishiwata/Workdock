@@ -22,7 +22,7 @@ $panel-padding: 25px;
     }
 
     .panel-body {
-        padding: 25px 0 5px;
+        padding: 25px 0;
 
         &.is-full {
             margin: -$panel-padding -$panel-padding 0;
@@ -30,6 +30,14 @@ $panel-padding: 25px;
 
         p {
             line-height: 1.4;
+        }
+
+        &.is-scroll {
+            max-height: 360px;
+            overflow-y: auto;
+            margin: 0 (-$panel-padding);
+            padding: $panel-padding;
+
         }
     }
 

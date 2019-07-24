@@ -4,7 +4,7 @@
 .task-list {
     // box-shadow: 2px 2px 25px $color-shadow;
     width: 100%;
-    height: calc(100vh - 250px);
+    height: calc(100vh - 230px);
 
     > table {
         min-width: 1200px;
@@ -18,6 +18,10 @@
         background-color: #FFFBDB !important;
     }
 
+    .cell-check {
+        width: 40px;
+        text-align: center;
+    }
     .cell-do {
         width: 40px;
         color: $color-link;
@@ -37,7 +41,7 @@
     }
 
     .cell-priority {
-        width: 70px;
+        width: 80px;
         text-align: center;
 
         &.is-high {
@@ -64,8 +68,8 @@
 } // .task-list
 
 .search-panel {
-    margin-bottom: 15px;
     font-size: .75rem;
+    margin-bottom: 12px;
 }
 
 .task-head {

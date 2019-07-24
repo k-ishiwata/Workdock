@@ -1,3 +1,17 @@
+@mixin icon($color:null) {
+    &.is-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        i {
+            color: $color;
+            font-size: 116%;
+            margin-right: 3px;
+        }
+    }
+}
+
 .btn {
     min-width: 150px;
     text-decoration: none;
@@ -69,14 +83,38 @@
         }
     }
 
-    &.is-icon {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        i {
-            margin-right: 3px;
-        }
-    }
+    @include icon();
 
 } // .btn
+
+.btn-group {
+    display: flex;
+
+    button {
+        border: solid 1px $color-bd;
+        padding: 10px 15px;
+        outline: none;
+        cursor: pointer;
+
+        &:hover {
+            background: $color-bg-hover;
+        }
+
+        + button {
+            border-left: none;
+        }
+
+        &:first-child {
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
+
+        &:last-child {
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+
+        @include icon($color-key);
+
+    }
+}

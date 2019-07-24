@@ -41,6 +41,15 @@ table {
         padding-top: 15px;
         padding-bottom: 15px;
         border-bottom: 3px solid $color-bd;
+
+        &.is-sort {
+            cursor: pointer;
+            background: #fff url("/img/sort.svg") no-repeat 7px center;
+
+            &:hover {
+                color: $color-text-hover;
+            }
+        }
     }
 
     .center {
@@ -73,11 +82,13 @@ table {
     }
 
     .cell-action {
+        font-size: 131%;
+
         a {
             text-decoration: none;
             display: inline-block;
         }
-    }
+    } //.cell-action
 
 } //.table
 

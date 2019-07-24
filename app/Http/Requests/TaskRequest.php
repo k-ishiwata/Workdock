@@ -27,6 +27,13 @@ class TaskRequest extends FormRequest
     {
         return [
             'title'    => 'required|max:200',
+            'project_id' => 'nullable|integer',
+            'status_id' => 'nullable|integer',
+            'priority_id' => 'nullable|integer',
+            'due_at' => 'nullable|date',
+            'start_at' => 'nullable|date',
+            'time' => 'nullable|integer',
+            'user_id' => 'nullable|integer',
         ];
     }
 

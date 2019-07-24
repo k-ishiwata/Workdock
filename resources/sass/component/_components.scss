@@ -52,12 +52,16 @@
             height: 10px;
             border-top: 2px solid #999;
             border-right: 2px solid #999;
-            transform: rotate(45deg);
+            transform: rotate(135deg);
             transition: transform .2s;
         }
 
         &:hover {
             color: $color-key;
+
+            &:before {
+                border-color: $color-key;
+            }
         }
     }
 
@@ -68,7 +72,8 @@
 
         .title {
             &:before {
-                transform: rotate(135deg);
+                top: 3px;
+                transform: rotate(-45deg);
             }
         }
     }

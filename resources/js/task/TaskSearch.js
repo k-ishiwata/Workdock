@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Context from "./Context";
 
 export default () => {
@@ -34,11 +34,8 @@ export default () => {
     };
 
     return (
-        <div className="search-panel toggle-block is-open">
-            <h3 className="title toggle-btn">
-                検索条件
-            </h3>
-            <div className="toggle-body">
+        <div className="search-panel">
+            <div>
                 <form className="form">
                     <div className="input-group mb10">
                         <div className="status-select checkbox-btn-group">

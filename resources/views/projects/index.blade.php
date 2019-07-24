@@ -25,19 +25,21 @@
                     <table class="table is-stripe">
                         <thead>
                         <tr>
-                            <th class="w80px">ID</th>
+                            <th class="w10">ID</th>
                             <th>タイトル</th>
+{{--                            <th class="w10">計測時間</th>--}}
                             <th class="w20">作成日</th>
                             <th class="w100px">アクション</th>
                         </tr>
                         </thead>
                         @foreach($projects as $project)
                             <tr>
-                                <td>{{ $project->id }}</td>
+                                <td>{{ sprintf('%04d', $project->id) }}</td>
                                 <td>{{ $project->title }}</td>
+{{--                                <td>{{ $project->timeFormat }}</td>--}}
                                 <td>{{ $project->created_at->format('y/m/d') }}</td>
                                 <td class="cell-action">
-                                    <a title="詳細"><i class="remixicon-file-text-line"></i></a>
+{{--                                    <a title="詳細"><i class="remixicon-file-text-line"></i></a>--}}
                                     <a href="{{ route('projects.edit', $project->id) }}" title="編集">
                                         <i class="remixicon-file-edit-line"></i>
                                     </a>

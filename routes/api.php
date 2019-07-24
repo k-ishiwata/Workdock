@@ -22,5 +22,9 @@ Route::apiResources([
     'users' => 'Api\UserController'
 ]);
 
-Route::get('projects', 'Api\ProjectController@index')->name('project.index');
+// タイマー切り替え
 Route::put('tasks/timer/{task}', 'Api\TaskController@toggleTimer')->name('task.start');
+// 複数削除
+Route::delete('tasks/deletes/{taskIds}', 'Api\TaskController@deletes')->name('task.deletes');
+
+Route::get('projects', 'Api\ProjectController@index')->name('project.index');

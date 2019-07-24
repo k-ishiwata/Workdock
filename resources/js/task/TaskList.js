@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useMemo } from 'react';
+import React, { useContext, useEffect, useState, useMemo, useRef } from 'react';
 import Context from './Context';
 import axios from "axios";
 import dayjs from 'dayjs';
@@ -18,12 +18,14 @@ export default () => {
     ] = context.taskReducer;
 
     const [isLoading, setIsLoading] = useState(false);
-    // ソート
+    // ソート情報
     const [sort, setSort] = useState({});
 
-    // Task一覧を取得
-    const fetchData = async () => {
+    // 一括削除用チェックリスト
+    const [deleteSelect, setDeleteSelect] = useState([]);
 
+    // データ一覧を取得
+    const fetchData = async () => {
         setIsLoading(true);
 
         await axios
@@ -185,32 +187,56 @@ export default () => {
                 });
             })
             .catch(error => {
-                console.log(error.response.data);
-
                 window.notice(error.response.data, 'error');
             });
+    };
+
+    const handleCheckDelete = (e, task) => {
+        // チェック時追加
+        if (e.target.checked) {
+            setDeleteSelect([...deleteSelect, task]);
+        }
+        // チェック解除時削除
+        else {
+            setDeleteSelect(deleteSelect.filter(t => t.id !== task.id));
+        }
     };
 
     return (
         <>
         <div className="task-head">
-            <button
-                className="btn is-sm is-icon"
-                id="refresh-btn"
-                onClick={handleReload}
-            >
-                <i className="remixicon-refresh-line"></i>更新
-            </button>
-            <button
-                className="btn is-sm is-icon is-orange"
-                onClick={() => {
-                    dispatch({
-                        type: 'inputModal',
-                        payload: { isInputModal: true }
-                    })
-                }}>
-                <i className="remixicon-add-circle-line"></i>新規登録
-            </button>
+            <div className="btn-group">
+                <button
+                    className="is-icon"
+                    id="refresh-btn"
+                    onClick={handleReload}
+                >
+                    <i className="remixicon-refresh-line"></i>更新
+                </button>
+                <button
+                    className="is-icon"
+                    onClick={() => {
+                        dispatch({
+                            type: 'inputModal',
+                            payload: { isInputModal: true }
+                        })
+                    }}>
+                    <i className="remixicon-add-circle-line"></i>新規登録
+                </button>
+                <button
+                    onClick={() => {
+                        dispatch({
+                            type: 'multipleDeleteModal',
+                            payload: {
+                                selectTasks: deleteSelect,
+                                isMultipleDeleteModal: true
+                            }
+                        });
+                    }}
+                    className="is-icon">
+                    <i className="remixicon-delete-bin-line"></i>一括削除
+                </button>
+            </div>
         </div>
         { isLoading ?
             <div className="loader" /> :
@@ -218,24 +244,34 @@ export default () => {
                 <table className="table is-stripe">
                     <thead>
                     <tr>
+                        <th className="cell-check"></th>
                         <th className="cell-do"></th>
-                        <th className="cell-id" onClick={() => handleSort('id')}>ID</th>
-                        <th className="cell-status" onClick={() => handleSort('status_id')}>状態</th>
-                        <th className="cell-priority" onClick={() => handleSort('priority_id')}>優先度</th>
+                        <th className="cell-id is-sort" onClick={() => handleSort('id')}>ID</th>
+                        <th className="cell-status is-sort" onClick={() => handleSort('status_id')}>状態</th>
+                        <th className="cell-priority is-sort" onClick={() => handleSort('priority_id')}>優先度</th>
                         <th className="cell-title">件名</th>
-                        <th className="cell-project" onClick={() => handleSort('project_id')}>プロジェクト</th>
-                        <th onClick={() => handleSort('due_at')}>期日</th>
-                        <th onClick={() => handleSort('created_at')}>登録日</th>
-                        <th onClick={() => handleSort('user_id')}>担当</th>
+                        <th className="cell-project is-sort" onClick={() => handleSort('project_id')}>プロジェクト</th>
+                        <th className="is-sort" onClick={() => handleSort('due_at')}>期日</th>
+                        <th className="is-sort" onClick={() => handleSort('created_at')}>登録日</th>
+                        <th className="is-sort" onClick={() => handleSort('user_id')}>担当</th>
                         <th>時間</th>
                         <th>アクション</th>
                     </tr>
                     </thead>
                     <tbody>
                     {
-                        filteredTask.map(task => {
+                        filteredTask.map((task, i) => {
                             return(
                                 <tr key={ task.id } className={task.start_at && 'doing'}>
+                                    <td className="cell-check">
+                                        <label className="checkbox is-label-none">
+                                            <input
+                                                type="checkbox"
+                                                name={'del' + task.id}
+                                                onChange={(e) => handleCheckDelete(e, task)} />
+                                                <span></span>
+                                        </label>
+                                    </td>
                                     <td className="cell-do">
                                         {task.user &&
                                             <i className={
@@ -284,7 +320,7 @@ export default () => {
                                                 }
                                             })
                                         }}>
-                                            <i className="remixicon-close-line"></i>
+                                            <i className="remixicon-delete-bin-line"></i>
                                         </a>
                                     </td>
                                 </tr>

@@ -1,6 +1,7 @@
 export default {
     task: {},
     tasks: [],
+    selectTasks: [],
     projects: [],
     users: [],
     status: [
@@ -24,11 +25,7 @@ export default {
     ],
     isInputModal: false,
     isDeleteModal: false,
-    // alert: {
-    //     isShow: false,
-    //     message: '',
-    //     status: ''
-    // },
+    isMultipleDeleteModal: false,
     filterQuery: {
         status_id: '0'
     }
