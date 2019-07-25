@@ -17,18 +17,12 @@
             <li><a href="/">ダッシュボード</a></li>
             <li><a href="/tasks">タスク</a></li>
             <li><a href="/projects">プロジェクト</a></li>
+            @can('admin')
             <li><a href="/users">ユーザー</a></li>
+            @endcan
         </ul>
     </nav>
 
-    <!-- <div id="global-search">
-        <form action="#" class="form">
-            <input type="text" placeholder="キーワード検索">
-            <button type="submit" class="search-btn">
-                <img src="assets/img/icon-search.svg" alt="">
-            </button>
-        </form>
-    </div> -->
     <div class="header-right">
         <div class="user-panel dropdown">
             <div class="user-panel-toggle dropdown-toggle">

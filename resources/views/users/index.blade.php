@@ -26,7 +26,22 @@
                                     <label class="form-label">パスワード確認</label>
                                     <input type="password" name="password_confirmation" value="{{ old('password_confirmation') }}" class="form-input">
                                 </div>
+                                <div class="input-group">
+                                    <label class="form-label">権限</label>
+                                    <div class="form-input">
 
+                                        <div class="select-box">
+                                            <select name="role_id">
+                                                @foreach(config('global.roles') as $key => $role)
+                                                <option
+                                                    value="{{ $key }}"
+                                                    @if((int)old('role_id') === $key) selected @endif
+                                                >{{ $role }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="panel-footer">
                                 <button class="btn is-primary">登　録</button>
@@ -41,6 +56,7 @@
                             <th class="w10">番号</th>
                             <th>ログインID</th>
                             <th>ユーザー名</th>
+                            <th>権限</th>
                             <th class="w20">登録日</th>
                             <th class="w100px">アクション</th>
                         </tr>
@@ -50,6 +66,7 @@
                                 <td>{{ $user->id }}</td>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->display_name }}</td>
+                                <td>{{ config('global.roles')[$user->role_id] }}</td>
                                 <td>{{ $user->created_at->format('y/m/d') }}</td>
                                 <td class="cell-action">
 {{--                                    <a title="詳細"><i class="remixicon-file-text-line"></i></a>--}}

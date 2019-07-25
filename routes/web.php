@@ -19,13 +19,18 @@ Route::group(['middleware' => 'auth'], function()
         return view('task');
     });
 
-    Route::resources([
-        'projects' => 'ProjectController',
-        'users' => 'UserController'
-    ]);
+//    Route::resources([
+//        'projects' => 'ProjectController',
+//        'users' => 'UserController'
+//    ]);
+
+    Route::resource('projects', 'ProjectController');
+
+    // 管理者のみアクセス可能
+    Route::group(['middleware' => ['can:admin']], function () {
+        Route::resource('users', 'UserController');
+    });
 });
 
 
 Auth::routes();
-
-//Route::get('/home', 'HomeController@index')->name('home');

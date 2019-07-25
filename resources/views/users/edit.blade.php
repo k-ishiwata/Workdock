@@ -28,6 +28,21 @@
                             <label class="form-label">パスワード確認</label>
                             <input type="text" name="password_confirmation" value="" class="form-input">
                         </div>
+                        <div class="input-group">
+                            <label class="form-label">権限</label>
+                            <div class="form-input">
+                                <div class="select-box">
+                                    <select name="role_id">
+                                        @foreach(config('global.roles') as $key => $role)
+                                            <option
+                                                value="{{ $key }}"
+                                                @if($user->role_id === $key) selected  @endif
+                                            >{{ $role }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="panel-footer">
                         <button class="btn is-primary">保　存</button>
