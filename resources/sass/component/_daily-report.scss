@@ -1,0 +1,106 @@
+//  ----------------------------------------------
+//  日報
+//  ----------------------------------------------
+.daily-report-head {
+    .daily-report-title {
+        font-weight: bold;
+
+        .name {
+            font-size: 1rem;
+            margin-bottom: 3px;
+        }
+
+        .time {
+            span {
+                font-size: 1.4rem;
+            }
+        }
+    }
+}
+
+.time-table {
+    .cell-time {
+        width: 90px;
+        text-align: center;
+    }
+
+    tbody {
+        td {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+
+
+    .time-bar {
+        width: 720px;
+        padding: 0 !important;
+        position: relative;
+        font-size: 11px;
+    }
+
+    /* 1時間 30px */
+    .bar {
+        width: 120px;
+        left: 240px;
+        height: 14px;
+        top: 50%;
+        margin-top: -7px;
+        background: #A9D4E3;
+        position: absolute;
+
+        &.is-orange {
+            background-color: #F0CFB3;
+        }
+    } // .bar
+
+    .cells {
+        display: flex;
+        position: relative;
+        z-index: 10;
+        height: 30px;
+        align-items: center;
+
+        > div {
+            border-left: solid 1px #bbb;
+            width: 30px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &:first-child {
+                border-left: none;
+            }
+        }
+    } // .cells
+
+    thead {
+        .cells {
+            display: flex;
+            position: relative;
+            z-index: 10;
+            height: 30px;
+            align-items: center;
+
+            > div {
+                border-left: solid 1px #bbb;
+                width: 30px;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                &:first-child {
+                    border-left: none;
+                }
+            }
+        } // .cells
+        .cells {
+            > div {
+                border-left: none;
+            }
+        } // .cells
+    } // thead
+} // .time-table

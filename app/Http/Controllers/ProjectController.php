@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\TimeLog;
 use App\Http\Requests\ProjectRequest;
 
 class ProjectController extends Controller
@@ -51,7 +52,23 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        // 作業時間の合計
+        $timeTotal = $project->timeLogs
+            ->groupBy(function ($row) use ($project) {
+                return $row->project_id === $project->id;
+            })
+            ->map(function ($row) {
+                return $row->sum('time');
+            });
+
+        $timeTotal = $timeTotal->first();
+
+        // 一番多い作業時間
+        $maxTime = $project->timeLogs->max('time');
+
+        $timeLogs = $project->timeLogs()->paginate(30);
+
+        return view('projects.show', compact('project', 'timeTotal', 'maxTime', 'timeLogs'));
     }
 
     /**

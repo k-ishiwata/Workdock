@@ -5,13 +5,13 @@
     if (!deleteModal) return;
 
     const daleteBtns = document.querySelectorAll('.delete-btn');
-    const submiteBaseUrl = document.getElementById('delete-form').action;
+    const submitBaseUrl = document.getElementById('delete-form').action;
 
     daleteBtns.forEach((btn) => {
         btn.addEventListener('click', (e) => {
             const selectId = e.target.getAttribute('data-id');
             deleteModal.classList.add('is-open');
-            deleteModal.querySelector('#delete-form').action = submiteBaseUrl + '/' + selectId;
+            deleteModal.querySelector('#delete-form').action = submitBaseUrl + '/' + selectId;
         });
     });
 

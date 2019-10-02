@@ -29,7 +29,6 @@
                                 <div class="input-group">
                                     <label class="form-label">権限</label>
                                     <div class="form-input">
-
                                         <div class="select-box">
                                             <select name="role_id">
                                                 @foreach(config('global.roles') as $key => $role)
@@ -69,7 +68,7 @@
                                 <td>{{ config('global.roles')[$user->role_id] }}</td>
                                 <td>{{ $user->created_at->format('y/m/d') }}</td>
                                 <td class="cell-action">
-{{--                                    <a title="詳細"><i class="remixicon-file-text-line"></i></a>--}}
+                                    <a href="{{ route('reports.show', $user->id) }}" title="詳細"><i class="remixicon-file-text-line"></i></a>
                                     <a href="{{ route('users.edit', $user->id) }}" title="編集">
                                         <i class="remixicon-file-edit-line"></i>
                                     </a>

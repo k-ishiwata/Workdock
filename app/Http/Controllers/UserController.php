@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\TimeLog;
 use App\Http\Requests\UserRequest;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -51,7 +53,28 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+//        $user->load('timeLogs.project');
+
+
+
+
+        $requestDate = new Carbon(\Request::input('date')) ?? Carbon::now();
+
+
+//        $currentDate = Carbon::now();
+
+//        dd($currentDate->format('d'));
+
+        // ログを取得
+        $timeLog = TimeLog::with('project')
+            ->where('user_id', $user->id)
+//            ->whereDay('start_at', $currentDate->format('Y-m-d'))
+            ->whereDay('start_at', $requestDate)
+            ->get();
+
+        $users = User::all();
+
+        return view('users.show', compact('user', 'users', 'timeLog', 'requestDate'));
     }
 
     /**

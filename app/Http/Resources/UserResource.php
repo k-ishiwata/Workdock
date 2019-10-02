@@ -18,6 +18,8 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'display_name' => $this->display_name,
+            'role_id' => $this->role_id,
+            'run_task_id' => $this->run_task_id,
         ];
     }
 }

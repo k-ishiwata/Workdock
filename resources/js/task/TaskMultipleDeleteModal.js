@@ -61,7 +61,10 @@ export default () => {
                         }
                     </div>
                     <div className="panel-footer">
-                        <button className="btn is-pink">削除</button>
+                        {
+                            (selectTasks.length >= 1) &&
+                            <button className="btn is-pink">削除</button>
+                        }
                         <a
                             className="btn close-btn"
                             onClick={() => {

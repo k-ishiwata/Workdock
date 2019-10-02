@@ -47,6 +47,11 @@ class Task extends Model
         return $this->belongsTo(Project::class);
     }
 
+    public function timeLogs()
+    {
+        return $this->hasMany(TimeLog::class);
+    }
+
     // 期日のフォーマット
     public function setDueAtAttribute($value)
     {

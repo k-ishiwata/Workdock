@@ -73,6 +73,19 @@ export default (state, action) => {
                 selectTasks: payload.selectTasks || [],
                 isMultipleDeleteModal: payload.isMultipleDeleteModal
             };
+        // タイマーモーダル
+        case 'timerModal':
+            return {
+                ...state,
+                task: payload.task || {},
+                isTimerModal: payload.isTimerModal,
+                startAt: payload.startAt
+            };
+        case 'setStartAt':
+            return  {
+                ...state,
+                startAt: payload.startAt
+            };
         case 'setProjects':
             return {
                 ...state,
@@ -87,6 +100,12 @@ export default (state, action) => {
             return {
                 ...state,
                 filterQuery: payload
+            };
+        // ログインユーザー情報
+        case 'setAuth':
+            return {
+                ...state,
+                auth: payload
             };
         default:
             return state;

@@ -28,3 +28,4 @@ Route::put('tasks/timer/{task}', 'Api\TaskController@toggleTimer')->name('task.s
 Route::delete('tasks/deletes/{taskIds}', 'Api\TaskController@deletes')->name('task.deletes');
 
 Route::get('projects', 'Api\ProjectController@index')->name('project.index');
+Route::get('auth', 'Api\AuthController@index')->name('auth.index');

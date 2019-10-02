@@ -82,7 +82,12 @@ table {
     }
 
     .cell-action {
-        font-size: 131%;
+        padding: 0 10px;
+        vertical-align: middle;
+
+        i {
+            font-size: 131%;
+        }
 
         a {
             text-decoration: none;

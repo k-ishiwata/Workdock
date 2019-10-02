@@ -20,26 +20,5 @@ window.addEventListener('load', () => {
     require('./commons/dropdown');
     require('./commons/notice');
     require('./commons/deleteModal');
-});
-
-// 日付入力
-import flatpickr from "flatpickr";
-import { Japanese } from "flatpickr/dist/l10n/ja";
-import 'flatpickr/dist/themes/light.css';
-
-flatpickr('.data-input', {
-    locale: Japanese,
-    enableTime: true,
-    dateFormat: "Y-m-d H:i",
-    // altFormat: "Y-m-d H:i",
-    allowInput: true
-    // dateFormat: "Y-m-d H:i:S"
-});
-
-// 範囲日付入力
-flatpickr('.data-range-input', {
-    mode: "range",
-    locale: Japanese,
-    dateFormat: "Y-m-d",
-    allowInput: true
+    require('./commons/inputDate');
 });

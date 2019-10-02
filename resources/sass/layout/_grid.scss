@@ -40,4 +40,12 @@ $widths: 100, 90, 80, 75, 70, 66, 65, 60, 50, 40, 35, 33, 30, 25, 20, 10;
     &.is-reverse {
         flex-direction : row-reverse
     }
+
+    &.is-between {
+        justify-content: space-between;
+    }
+
+    &.is-item-center {
+        align-items: center;
+    }
 } // .row

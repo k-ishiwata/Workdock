@@ -22,7 +22,7 @@ $panel-padding: 25px;
     }
 
     .panel-body {
-        padding: 25px 0;
+        padding: $panel-padding 0;
 
         &.is-full {
             margin: -$panel-padding -$panel-padding 0;
@@ -59,7 +59,7 @@ $panel-padding: 25px;
     .panel {
         padding: 20px;
         margin: 10px;
-        
+
         .panel-title {
             margin-top: -20px;
         }
@@ -71,7 +71,7 @@ $panel-padding: 25px;
             text-align: center;
             display: flex;
             justify-content: center;
-    
+
             .btn {
                 width: 100%;
                 min-width: 0;

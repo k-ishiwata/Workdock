@@ -14,8 +14,11 @@
         font-size: 1.1rem;
     }
 
-    .doing {
+    .is-doing {
         background-color: #FFFBDB !important;
+    }
+    .is-overdue {
+        background-color: #FFE2E2 !important;
     }
 
     .cell-check {
@@ -32,17 +35,10 @@
             color: $color-link-hover;
         }
     }
-    .cell-id {
-        width: 70px;
-    }
-    .cell-status {
-        width: 100px;
-        text-align: center;
-    }
+
 
     .cell-priority {
         width: 80px;
-        text-align: center;
 
         &.is-high {
             color: map-get($colors, "red");
@@ -50,17 +46,18 @@
         }
     }
 
-    .cell-project {
-        width: 150px;
-    }
-
     .cell-title {
-        width: 35%;
+        //width: 35%;
     }
 
-    .cell-date {
-        width: 100px;
-    }
+    .cell-id { width: 70px; }
+    .cell-status { width: 100px; }
+    .cell-project { width: 150px; }
+    .cell-due { width: 140px; }
+    .cell-date { width: 100px; }
+    .cell-user { width: 100px; }
+    .cell-time { width: 80px; }
+    .cell-action { width: 100px; }
 
     .label {
         min-width: 75px;

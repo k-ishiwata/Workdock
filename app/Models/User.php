@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'display_name', 'email', 'password', 'role_id','run_task_id'
+        'name', 'display_name', 'email', 'password', 'role_id', 'run_task_id'
     ];
 
     /**
@@ -36,4 +36,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+//    public function timeLog()
+//    {
+//        return $this->belongsTo(TimeLog::class);
+//    }
+
+    public function timeLogs()
+    {
+        return $this->hasMany(TimeLog::class);
+    }
+
 }

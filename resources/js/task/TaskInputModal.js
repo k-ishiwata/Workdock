@@ -6,7 +6,7 @@ import axios from "axios";
 export default () => {
     const context = useContext(Context);
     const [
-        { isInputModal, task, priority, projects, status, users },
+        { isInputModal, task, priority, projects, status, users, auth },
         dispatch
     ] = context.taskReducer;
 
@@ -121,7 +121,7 @@ export default () => {
 
                         <div className="input-group">
                             <label className="form-label">期日</label>
-                            <input type="text" name="due_at" className="form-input data-input"
+                            <input type="text" name="due_at" className="form-input data-input-time"
                                    value={
                                        task.due_at &&
                                        dayjs(task.due_at).format('YYYY-MM-DD HH:mm') ||

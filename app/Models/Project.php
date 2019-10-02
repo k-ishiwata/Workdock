@@ -23,4 +23,9 @@ class Project extends Model
 
         return sprintf('%02d', $hour) . ':' . sprintf('%02d', $min);
     }
+
+    public function timeLogs()
+    {
+        return $this->hasMany(TimeLog::class);
+    }
 }

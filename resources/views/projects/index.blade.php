@@ -39,17 +39,17 @@
 {{--                                <td>{{ $project->timeFormat }}</td>--}}
                                 <td>{{ $project->created_at->format('y/m/d') }}</td>
                                 <td class="cell-action">
-{{--                                    <a title="詳細"><i class="remixicon-file-text-line"></i></a>--}}
+                                    <a href="{{ route('projects.show', $project->id) }}" title="詳細"><i class="remixicon-time-line"></i></a>
                                     <a href="{{ route('projects.edit', $project->id) }}" title="編集">
                                         <i class="remixicon-file-edit-line"></i>
                                     </a>
-                                    <a title="削除"><i class="remixicon-close-line delete-btn" data-id="{{ $project->id }}"></i></a>
+                                    <a title="削除"><i class="remixicon-delete-bin-line delete-btn" data-id="{{ $project->id }}"></i></a>
                                 </td>
                             </tr>
                         @endforeach
                     </table>
 
-                    {!! $projects->render() !!}
+                    {!! $projects->links() !!}
                 </div>
             </div>
         </div>

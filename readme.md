@@ -1,6 +1,6 @@
 ## Workdockとは
 
-WorkdockはLaravelと一部Reactで作られたタスク管理＆タイムマネージメントツールです。
+WorkdockはLaravelと一部Reactで作られたタスク管理＆タイムトラッキングツールです。
 
 ![01](https://user-images.githubusercontent.com/1312692/61922718-5eb21980-af9c-11e9-9287-8b4434e920d3.png)
 

@@ -6,6 +6,7 @@ form *:focus {
 }
 
 .form {
+    .input,
     input[type="text"],
     input[type="email"],
     input[type="password"],
@@ -22,17 +23,19 @@ form *:focus {
     select {
         border: solid 1px $color-bd;
     }
-
+    .input,
     input[type="text"],
     input[type="email"],
     input[type="password"] {
         height: 32px;
     }
 
+    .input.is-input,
     input[type="text"].is-input,
     input[type="email"].is-input,
     input[type="password"].is-input,
     textarea.is-input,
+    .input:focus,
     input[type="text"]:focus,
     input[type="email"]:focus,
     input[type="password"]:focus,
@@ -150,6 +153,20 @@ form *:focus {
 
                 &.is-checkbox {
                     padding-top: 13px;
+                }
+            }
+
+            .input-inline {
+                display: flex;
+                width: 80%;
+                align-items: center;
+
+                .form-input {
+                    width: 100%;
+
+                    + .form-input {
+                        margin-left: 10px;
+                    }
                 }
             }
         } // .input-group

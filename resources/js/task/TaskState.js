@@ -1,4 +1,5 @@
 export default {
+    auth: {},
     task: {},
     tasks: [],
     selectTasks: [],
@@ -26,6 +27,13 @@ export default {
     isInputModal: false,
     isDeleteModal: false,
     isMultipleDeleteModal: false,
+    isTimerModal: false,
+    // 開始時間
+    startAt: null,
+    // startAt: {
+    //     hour: 0,
+    //     min: 0
+    // },
     filterQuery: {
         status_id: '0'
     }

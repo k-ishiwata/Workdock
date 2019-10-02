@@ -1,6 +1,3 @@
-@import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
-@import '~remixicon/fonts/remixicon';
-
 @import "variables";
 
 @import "base/normalize";
@@ -16,10 +13,14 @@
 @import "component/pager";
 @import "component/notice";
 @import "component/alert";
+@import "component/title";
 @import "component/loader";
+@import "component/daily-report";
 
 @import "layout/grid";
 @import "layout/header";
 @import "layout/main";
 @import "layout/login";
 @import "layout/layouts";
+
+@import '~remixicon/fonts/remixicon';

@@ -14,9 +14,10 @@
     <!-- <p class="brand-logo"><a href="/">Work<span>Dock</span></a></p> -->
     <nav class="header-nav">
         <ul>
-            <li><a href="/">ダッシュボード</a></li>
+{{--            <li><a href="/">ダッシュボード</a></li>--}}
             <li><a href="/tasks">タスク</a></li>
             <li><a href="/projects">プロジェクト</a></li>
+            <li><a href="/reports">レポート</a></li>
             @can('admin')
             <li><a href="/users">ユーザー</a></li>
             @endcan

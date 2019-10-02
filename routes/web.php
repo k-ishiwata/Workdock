@@ -13,18 +13,26 @@
 
 Route::group(['middleware' => 'auth'], function()
 {
-    Route::get('/', 'HomeController@index');
+//    Route::get('/', 'HomeController@index');
+    Route::redirect('/', 'tasks', 301);
 
     Route::get('tasks', function () {
         return view('task');
     });
 
-//    Route::resources([
-//        'projects' => 'ProjectController',
-//        'users' => 'UserController'
-//    ]);
-
     Route::resource('projects', 'ProjectController');
+    Route::resource('reports', 'ReportController')->except([
+        'show'
+    ]);
+
+    Route::get('reports/{user}/{year?}/{month?}/{day?}', 'ReportController@show')
+        ->where([
+            'year' => '\d{4}',
+            'month' => '\d{2}',
+            'day' => '\d{2}'
+        ])
+        ->name('reports.show');
+
 
     // 管理者のみアクセス可能
     Route::group(['middleware' => ['can:admin']], function () {

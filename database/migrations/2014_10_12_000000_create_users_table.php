@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->tinyInteger('role_id')->default(5)->comment('ロール');
             $table->unsignedInteger('run_task_id')->nullable()->comment('実行中のタスク');
+//            $table->unsignedInteger('time_log_id')->nullable()->comment('実行中のタイムログ');
             $table->rememberToken();
             $table->timestamps();
         });

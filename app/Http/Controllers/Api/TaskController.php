@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Task;
+use App\Models\TimeLog;
+use App\Services\TimerService;
 use App\Http\Requests\TaskRequest;
+use Illuminate\Http\Request;
 
 use App\Http\Resources\TaskResource;
 use Carbon\Carbon;
-use PhpParser\Node\Expr\Array_;
 
 class TaskController extends Controller
 {
@@ -86,44 +88,24 @@ class TaskController extends Controller
      * start_atに現在の時間を記録
      * @param Task $task
      */
-    public function toggleTimer(Task $task)
+    public function toggleTimer(Task $task, Request $request, TimerService $timerService)
     {
+        $user = \Auth::user();
+
         // 別の担当のタスクは戻る
-        if (\Auth::id() !== $task->user->id) {
+        if ($user->id !== $task->user->id) {
             return response()->json('他の担当者のタスクは実行できません。', 409);
         }
 
         // 他のタスクが実行中なら戻る
-        if ($runTaskID = \Auth::user()->run_task_id) {
-            if ($runTaskID !== $task->id) {
-                return response()->json('タスクID:' . $runTaskID . 'が実行中です。', 409);
+        if ($user->run_task_id) {
+            if ($user->run_task_id !== $task->id) {
+                return response()->json('タスクID:' . $user->run_task_id . 'が実行中です。', 409);
             }
         }
 
-        // タイマーが実行中の場合は停止して時間を加算
-        if ($task->start_at) {
-            // 開始と停止時間の差分を取得（分）
-            $time = $task->start_at->diffInMinutes(Carbon::now());
-
-            $task->time += $time;
-            $task->start_at = null;
-
-            $task->user->run_task_id = null;
-        }
-        // タイマーが実行されていない場合は開始
-        else {
-            $task->start_at = Carbon::now();
-            $task->user->run_task_id = $task->id;
-        }
-
-        $task->save();
-        $task->user->save();
-
-        // タスクにプロジェクトが設定してある場合は加算
-//        if (isset($time) && $task->project) {
-//            $task->project->time += $time;
-//            $task->project->save();
-//        }
+        // 時間を保存
+        $task = $timerService->toggleTimer($user, $request->start_at, $task);
 
         return TaskResource::make($task);
     }

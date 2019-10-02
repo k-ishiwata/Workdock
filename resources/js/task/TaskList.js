@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useMemo, useRef } from 'react';
+import React, { useContext, useEffect, useState, useMemo } from 'react';
 import Context from './Context';
 import axios from "axios";
 import dayjs from 'dayjs';
@@ -13,7 +13,7 @@ function timeFormat(num) {
 export default () => {
     const context = useContext(Context);
     const [
-        { tasks, projects, status, priority, filterQuery },
+        { tasks, projects, status, priority, filterQuery, auth },
         dispatch
     ] = context.taskReducer;
 
@@ -27,6 +27,17 @@ export default () => {
     // データ一覧を取得
     const fetchData = async () => {
         setIsLoading(true);
+
+        await axios
+            .get('/api/auth')
+            .then(response => {
+                dispatch({
+                    type: 'setAuth',
+                    payload: response.data.data
+                });
+            }).catch(error => {
+                window.notice('データの取得に失敗しました。', 'error');
+            });
 
         await axios
             .get('/api/users')
@@ -75,15 +86,6 @@ export default () => {
 
     // 選択したカラムでソートする
     const handleSort = column => {
-        /*if (sort.key === column) {
-            setSort({ ...sort, order: -sort.order });
-        } else {
-            setSort({
-                key: column,
-                order: 1
-            })
-        }*/
-
         if (sort.key === column) {
             setSort({ ...sort, order: !sort.order });
         } else {
@@ -92,7 +94,6 @@ export default () => {
                 order: true
             })
         }
-
     };
 
     // 絞り込み検索
@@ -176,19 +177,22 @@ export default () => {
         return tmpTasks;
     }, [filterQuery, sort, tasks]);
 
-    // タイマーの実行
-    const handleTimer = async task => {
-        await axios
-            .put('/api/tasks/timer/' + task.id, task)
-            .then(response => {
-                dispatch({
-                    type: 'updateTask',
-                    payload: response.data.data
-                });
-            })
-            .catch(error => {
-                window.notice(error.response.data, 'error');
-            });
+    // タイマーモーダル
+    const handleTimer = task => {
+
+        if (task.user_id !== auth.id) {
+            window.notice('他の担当者のタスクは実行できません。', 'error');
+            return;
+        }
+
+        dispatch({
+            type: 'timerModal',
+            payload: {
+                task: task,
+                isTimerModal: true,
+                startAt: dayjs()
+            }
+        });
     };
 
     const handleCheckDelete = (e, task) => {
@@ -218,7 +222,10 @@ export default () => {
                     onClick={() => {
                         dispatch({
                             type: 'inputModal',
-                            payload: { isInputModal: true }
+                            payload: {
+                                task: { user_id: auth.id },
+                                isInputModal: true
+                            }
                         })
                     }}>
                     <i className="remixicon-add-circle-line"></i>新規登録
@@ -251,18 +258,21 @@ export default () => {
                         <th className="cell-priority is-sort" onClick={() => handleSort('priority_id')}>優先度</th>
                         <th className="cell-title">件名</th>
                         <th className="cell-project is-sort" onClick={() => handleSort('project_id')}>プロジェクト</th>
-                        <th className="is-sort" onClick={() => handleSort('due_at')}>期日</th>
-                        <th className="is-sort" onClick={() => handleSort('created_at')}>登録日</th>
-                        <th className="is-sort" onClick={() => handleSort('user_id')}>担当</th>
-                        <th>時間</th>
-                        <th>アクション</th>
+                        <th className="cell-due is-sort" onClick={() => handleSort('due_at')}>期日</th>
+                        <th className="cell-date is-sort" onClick={() => handleSort('created_at')}>登録日</th>
+                        <th className="cell-user is-sort" onClick={() => handleSort('user_id')}>担当</th>
+                        <th className="cell-time">時間</th>
+                        <th className="cell-action">アクション</th>
                     </tr>
                     </thead>
                     <tbody>
                     {
                         filteredTask.map((task, i) => {
                             return(
-                                <tr key={ task.id } className={task.start_at && 'doing'}>
+                                <tr key={ task.id } className={
+                                        (dayjs().isAfter(dayjs(task.due_at)) ? 'is-overdue' : '') +
+                                        (task.start_at ? ' is-doing' : '')
+                                    }>
                                     <td className="cell-check">
                                         <label className="checkbox is-label-none">
                                             <input
@@ -280,12 +290,12 @@ export default () => {
                                         }
                                     </td>
                                     <td>{( '0000' + task.id ).slice( -4 )}</td>
-                                    <td className="cell-status">
+                                    <td className="cell-status center">
                                         <span className={'label is-' + status[task.status_id].color}>
                                             {status[task.status_id].label}
                                         </span>
                                     </td>
-                                    <td className={'cell-priority ' + (task.priority_id == 1 && 'is-high')}>
+                                    <td className={'cell-priority center ' + (task.priority_id == 1 && 'is-high')}>
                                         {priority[task.priority_id]}
                                     </td>
                                     <td className="cell-title">{task.title}</td>
@@ -295,10 +305,10 @@ export default () => {
                                             projects.find(x => x.id === task.project_id).title
                                     }
                                     </a></td>
-                                    <td>{task.due_at && dayjs(task.due_at).format('YY/MM/DD')}</td>
-                                    <td>{dayjs(task.created_at).format('YY/MM/DD')}</td>
-                                    <td>{task.user ? task.user.display_name : '未設定'}</td>
-                                    <td>{timeFormat(task.time)}</td>
+                                    <td className="center">{task.due_at && dayjs(task.due_at).format('YY/MM/DD HH:mm')}</td>
+                                    <td className="center">{dayjs(task.created_at).format('YY/MM/DD')}</td>
+                                    <td className="center">{task.user ? task.user.display_name : '未設定'}</td>
+                                    <td className="center">{timeFormat(task.time)}</td>
                                     <td className="cell-action">
                                         <a title="編集" onClick={() => {
                                             dispatch({
