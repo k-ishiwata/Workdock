@@ -8,6 +8,8 @@ WorkdockはLaravelと一部Reactで作られたタスク管理＆タイムトラ
 
 ![03](https://user-images.githubusercontent.com/1312692/61922739-77223400-af9c-11e9-9315-9fe487119fca.png)
 
+![workdock4](https://user-images.githubusercontent.com/1312692/66093258-7a542480-e5ca-11e9-8fff-978d45dd1555.png)
+
 ## 機能
 
 * タスクの追加/編集/削除/一括削除
@@ -15,6 +17,7 @@ WorkdockはLaravelと一部Reactで作られたタスク管理＆タイムトラ
 * タスクの時間計測
 * プロジェクト（グループ）管理
 * プロジェクトの追加/編集/削除
+* ユーザーの作業レポート
 * ユーザーの追加/編集/削除
 * ユーザー権限
 

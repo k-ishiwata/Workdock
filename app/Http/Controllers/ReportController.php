@@ -67,7 +67,7 @@ class ReportController extends Controller
         return redirect()
             ->route('reports.show', [
                 'user' => $request->input('user_id'),
-                'date' => $request->start_at->format('Y-m-d')
+                'date' => $request->start_at->format('Y/m/d')
             ])
             ->with('alert', 'レポート情報を登録しました。');
     }
